@@ -2,8 +2,10 @@ import { useState } from "react";
 import Logo from "../components/Logo";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import { api } from "../services/api";
 
 import "../styles/login.css";
+
 
 export default function Login() {
     const [email, setEmail] =useState("");
@@ -11,7 +13,7 @@ export default function Login() {
     const [erro, setErro] =useState("");
     const [sucesso, setSucesso] =useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         setErro("");
@@ -29,7 +31,12 @@ export default function Login() {
             return;
         }
 
-        setSucesso("Login validado com sucesso! (Simulação)");
+        try{
+            const response = await api.post("/login", {email, senha});
+            setSucesso(response.data.message);
+        }catch(error){
+            setErro(error.response?.data?.massage || "Erro ao realizar login.");
+        }
     };
     
   return (
