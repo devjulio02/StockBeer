@@ -35,7 +35,7 @@ export default function Login() {
             const response = await api.post("/login", {email, senha});
             setSucesso(response.data.message);
         }catch(error){
-            setErro(error.response?.data?.massage || "Erro ao realizar login.");
+            setErro(error.response?.data?.message || "Erro ao realizar login.");
         }
     };
     
