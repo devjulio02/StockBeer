@@ -1,0 +1,17 @@
+services:
+  stockbeer-db:
+    image: postgres:16
+    container_name: stockbeer-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: stockbeer
+      POSTGRES_USER: stockbeer_user
+      POSTGRES_PASSWORD: stockbeer_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - stockbeer_db_data:/var/lib/postgresql/data
+      - ./backend/database/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+
+volumes:
+  stockbeer_db_data:
