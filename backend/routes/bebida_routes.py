@@ -25,7 +25,19 @@ def cadastrar_bebida():
 
 @bebida_bp.route("/bebidas", methods=["GET"])
 def listar_bebidas():
-    sucesso, mensagem, bebidas = BebidaService.listar()
+    filtros = {
+        "busca": request.args.get("busca"),
+        "categoria": request.args.get("categoria"),
+        "ordenar": request.args.get("ordenar")
+    }
+
+    sucesso, mensagem, bebidas = BebidaService.listar(filtros)
+
+    if not sucesso:
+        return jsonify({
+            "success": False,
+            "message": mensagem
+        }), 400
 
     return jsonify({
         "success": sucesso,
