@@ -6,12 +6,6 @@ from repositories.bebida_repository import BebidaRepository
 class BebidaService:
 
     @staticmethod
-    def listar():
-        bebidas = BebidaRepository.listar()
-
-        return True, "Bebidas listadas com sucesso", bebidas
-
-    @staticmethod
     def cadastrar(dados):
         valido, mensagem, dados_validados = BebidaService.validar_cadastro(dados)
 
@@ -21,6 +15,28 @@ class BebidaService:
         bebida = BebidaRepository.cadastrar(dados_validados)
 
         return True, "Bebida cadastrada com sucesso", bebida
+
+    @staticmethod
+    def listar(filtros=None):
+        filtros = filtros or {}
+
+        ordenar = filtros.get("ordenar")
+
+        ordenacoes_permitidas = [
+            "id",
+            "nome",
+            "categoria",
+            "marca",
+            "preco",
+            "quantidade"
+        ]
+
+        if ordenar and ordenar not in ordenacoes_permitidas:
+            return False, "Ordenação inválida.", None
+
+        bebidas = BebidaRepository.listar(filtros)
+
+        return True, "Bebidas listadas com sucesso", bebidas
 
     @staticmethod
     def validar_cadastro(dados):

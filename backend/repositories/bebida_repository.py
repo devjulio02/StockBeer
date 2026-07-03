@@ -67,13 +67,64 @@ class BebidaRepository:
             conn.close()
 
     @staticmethod
-    def listar():
+    def listar(filtros=None):
+        filtros = filtros or {}
+
         conn = get_connection()
 
         try:
             with conn.cursor() as cursor:
+                condicoes = []
+                parametros = []
+
+                busca = filtros.get("busca")
+                categoria = filtros.get("categoria")
+                ordenar = filtros.get("ordenar")
+
+                if busca:
+                    termo_busca = f"%{busca}%"
+
+                    condicoes.append(
+                        """
+                        (
+                            b.nome ILIKE %s OR
+                            b.marca ILIKE %s OR
+                            c.nome ILIKE %s
+                        )
+                        """
+                    )
+
+                    parametros.extend([
+                        termo_busca,
+                        termo_busca,
+                        termo_busca
+                    ])
+
+                if categoria:
+                    condicoes.append("c.nome ILIKE %s")
+                    parametros.append(categoria)
+
+                where_sql = ""
+
+                if condicoes:
+                    where_sql = "WHERE " + " AND ".join(condicoes)
+
+                ordenacoes_permitidas = {
+                    "id": "b.id",
+                    "nome": "b.nome",
+                    "categoria": "c.nome",
+                    "marca": "b.marca",
+                    "preco": "b.preco",
+                    "quantidade": "b.quantidade"
+                }
+
+                coluna_ordenacao = ordenacoes_permitidas.get(
+                    ordenar,
+                    "b.id"
+                )
+
                 cursor.execute(
-                    """
+                    f"""
                     SELECT
                         b.id,
                         b.nome,
@@ -84,8 +135,10 @@ class BebidaRepository:
                         b.estoque_minimo
                     FROM bebidas b
                     JOIN categorias c ON c.id = b.categoria_id
-                    ORDER BY b.id ASC;
-                    """
+                    {where_sql}
+                    ORDER BY {coluna_ordenacao} ASC;
+                    """,
+                    parametros
                 )
 
                 bebidas = cursor.fetchall()
