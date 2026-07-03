@@ -6,6 +6,12 @@ from repositories.bebida_repository import BebidaRepository
 class BebidaService:
 
     @staticmethod
+    def listar():
+        bebidas = BebidaRepository.listar()
+
+        return True, "Bebidas listadas com sucesso", bebidas
+
+    @staticmethod
     def cadastrar(dados):
         valido, mensagem, dados_validados = BebidaService.validar_cadastro(dados)
 
