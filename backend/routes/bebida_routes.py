@@ -22,3 +22,13 @@ def cadastrar_bebida():
         "message": mensagem,
         "bebida": bebida
     }), 201
+
+@bebida_bp.route("/bebidas", methods=["GET"])
+def listar_bebidas():
+    sucesso, mensagem, bebidas = BebidaService.listar()
+
+    return jsonify({
+        "success": sucesso,
+        "message": mensagem,
+        "bebidas": bebidas
+    }), 200

@@ -63,6 +63,46 @@ class BebidaRepository:
                         "quantidade_estoque": bebida["quantidade"],
                         "estoque_minimo": bebida["estoque_minimo"],
                     }
+        finally:
+            conn.close()
+
+    @staticmethod
+    def listar():
+        conn = get_connection()
+
+        try:
+            with conn.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT
+                        b.id,
+                        b.nome,
+                        c.nome AS categoria,
+                        b.marca,
+                        b.preco,
+                        b.quantidade,
+                        b.estoque_minimo
+                    FROM bebidas b
+                    JOIN categorias c ON c.id = b.categoria_id
+                    ORDER BY b.id ASC;
+                    """
+                )
+
+                bebidas = cursor.fetchall()
+
+                return [
+                    {
+                        "id": bebida["id"],
+                        "sku": f"SKU-{bebida['id']:03d}",
+                        "nome": bebida["nome"],
+                        "categoria": bebida["categoria"],
+                        "marca": bebida["marca"],
+                        "preco": float(bebida["preco"]),
+                        "quantidade_estoque": bebida["quantidade"],
+                        "estoque_minimo": bebida["estoque_minimo"],
+                    }
+                    for bebida in bebidas
+                ]
 
         finally:
             conn.close()
