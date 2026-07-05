@@ -1,0 +1,140 @@
+.cadastro-content {
+  background: #f4f6fa;
+}
+
+.cadastro-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-button {
+  height: 44px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 14px;
+  background: #f1f5f9;
+  color: #334155;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cadastro-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.form-card {
+  width: 760px;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 34px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+}
+
+.form-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.form-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: #d89000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-title h2 {
+  font-size: 22px;
+  color: #0f172a;
+}
+
+.form-title p {
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group.full {
+  grid-column: span 2;
+}
+
+.form-group label {
+  font-weight: 800;
+  color: #334155;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+  height: 48px;
+  border-radius: 15px;
+  border: 1px solid #e5e7eb;
+  padding: 0 16px;
+  outline: none;
+  color: #0f172a;
+  font-weight: 600;
+  background: #ffffff;
+}
+
+.form-group input::placeholder {
+  color: #94a3b8;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.cancel-button,
+.save-button {
+  height: 48px;
+  border: none;
+  border-radius: 15px;
+  padding: 0 22px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.save-button {
+  background: #d89000;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  object-fit: contain;
+}
