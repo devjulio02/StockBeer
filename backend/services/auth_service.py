@@ -1,12 +1,16 @@
-# services/auth_service.py
+from repositories.auth_repository import AuthRepository
+
 
 class AuthService:
 
     @staticmethod
     def autenticar(email, senha):
+        if not email or not senha:
+            return False
 
-        # Simulação inicial
-        if email == "admin@stockbeer.com" and senha == "123456":
-            return True
+        usuario = AuthRepository.buscar_por_email(email)
 
-        return False
+        if not usuario:
+            return False
+
+        return usuario["senha"] == senha
