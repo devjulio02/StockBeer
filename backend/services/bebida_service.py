@@ -37,6 +37,35 @@ class BebidaService:
         bebidas = BebidaRepository.listar(filtros)
 
         return True, "Bebidas listadas com sucesso", bebidas
+    
+    @staticmethod
+    def editar(bebida_id, dados):
+        if bebida_id <= 0:
+            return False, "ID da bebida inválido.", None
+
+        valido, mensagem, dados_validados = BebidaService.validar_cadastro(dados)
+
+        if not valido:
+            return False, mensagem, None
+
+        bebida = BebidaRepository.editar(bebida_id, dados_validados)
+
+        if not bebida:
+            return False, "Bebida não encontrada.", None
+
+        return True, "Bebida atualizada com sucesso", bebida
+
+    @staticmethod
+    def excluir(bebida_id):
+        if bebida_id <= 0:
+            return False, "ID da bebida inválido."
+
+        bebida_excluida = BebidaRepository.excluir(bebida_id)
+
+        if not bebida_excluida:
+            return False, "Bebida não encontrada."
+
+        return True, "Bebida excluída com sucesso"
 
     @staticmethod
     def validar_cadastro(dados):

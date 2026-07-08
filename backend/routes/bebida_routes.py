@@ -44,3 +44,41 @@ def listar_bebidas():
         "message": mensagem,
         "bebidas": bebidas
     }), 200
+
+@bebida_bp.route("/bebidas/<int:bebida_id>", methods=["PUT"])
+def editar_bebida(bebida_id):
+    dados = request.get_json()
+
+    sucesso, mensagem, bebida = BebidaService.editar(bebida_id, dados)
+
+    if not sucesso:
+        status = 404 if mensagem == "Bebida não encontrada." else 400
+
+        return jsonify({
+            "success": False,
+            "message": mensagem
+        }), status
+
+    return jsonify({
+        "success": True,
+        "message": mensagem,
+        "bebida": bebida
+    }), 200
+
+
+@bebida_bp.route("/bebidas/<int:bebida_id>", methods=["DELETE"])
+def excluir_bebida(bebida_id):
+    sucesso, mensagem = BebidaService.excluir(bebida_id)
+
+    if not sucesso:
+        status = 404 if mensagem == "Bebida não encontrada." else 400
+
+        return jsonify({
+            "success": False,
+            "message": mensagem
+        }), status
+
+    return jsonify({
+        "success": True,
+        "message": mensagem
+    }), 200

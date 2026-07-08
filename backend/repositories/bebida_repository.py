@@ -159,3 +159,96 @@ class BebidaRepository:
 
         finally:
             conn.close()
+
+    @staticmethod
+    def editar(bebida_id, dados):
+        conn = get_connection()
+
+        try:
+            with conn:
+                with conn.cursor() as cursor:
+                    cursor.execute(
+                        """
+                        INSERT INTO categorias (nome)
+                        VALUES (%s)
+                        ON CONFLICT (nome) DO UPDATE SET nome = EXCLUDED.nome
+                        RETURNING id;
+                        """,
+                        (dados["categoria"],)
+                    )
+
+                    categoria_id = cursor.fetchone()["id"]
+
+                    cursor.execute(
+                        """
+                        UPDATE bebidas
+                        SET
+                            nome = %s,
+                            marca = %s,
+                            preco = %s,
+                            quantidade = %s,
+                            estoque_minimo = %s,
+                            categoria_id = %s
+                        WHERE id = %s
+                        RETURNING
+                            id,
+                            nome,
+                            marca,
+                            preco,
+                            quantidade,
+                            estoque_minimo;
+                        """,
+                        (
+                            dados["nome"],
+                            dados["marca"],
+                            dados["preco"],
+                            dados["quantidade_estoque"],
+                            dados["estoque_minimo"],
+                            categoria_id,
+                            bebida_id
+                        )
+                    )
+
+                    bebida = cursor.fetchone()
+
+                    if not bebida:
+                        return None
+
+                    bebida = dict(bebida)
+
+                    return {
+                        "id": bebida["id"],
+                        "sku": f"SKU-{bebida['id']:03d}",
+                        "nome": bebida["nome"],
+                        "categoria": dados["categoria"],
+                        "marca": bebida["marca"],
+                        "preco": float(bebida["preco"]),
+                        "quantidade_estoque": bebida["quantidade"],
+                        "estoque_minimo": bebida["estoque_minimo"],
+                    }
+
+        finally:
+            conn.close()
+
+    @staticmethod
+    def excluir(bebida_id):
+        conn = get_connection()
+
+        try:
+            with conn:
+                with conn.cursor() as cursor:
+                    cursor.execute(
+                        """
+                        DELETE FROM bebidas
+                        WHERE id = %s
+                        RETURNING id;
+                        """,
+                        (bebida_id,)
+                    )
+
+                    bebida = cursor.fetchone()
+
+                    return bebida is not None
+
+        finally:
+            conn.close()
