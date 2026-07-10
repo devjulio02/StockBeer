@@ -53,7 +53,7 @@ export default function EditarBebidaModal({
     return (
         <div className="modal-overlay" onClick={onClose}>
 
-            <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <div className="editar-bebida-modal" onClick={(e) => e.stopPropagation()}>
 
                 <h2>Editar Bebida</h2>
 

@@ -1,96 +1,95 @@
-.modal-overlay{
+.modal-overlay {
     position: fixed;
     inset: 0;
 
     background: rgba(0,0,0,.45);
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    z-index:1000;
+    z-index: 1000;
 }
 
-.modal{
+.editar-bebida-modal {
 
-    width:520px;
-    max-width:90%;
+    width: 520px;
+    max-width: 90%;
 
-    background:white;
+    background: white;
 
-    border-radius:18px;
+    border-radius: 18px;
 
-    padding:30px;
+    padding: 30px;
 
-    box-shadow:0 15px 45px rgba(0,0,0,.25);
-
+    box-shadow: 0 15px 45px rgba(0,0,0,.25);
 }
 
-.modal h2{
+.editar-bebida-modal h2 {
 
-    margin-bottom:25px;
+    margin-bottom: 25px;
 
-    color:#1f2937;
+    color: #1f2937;
 
-    text-align:center;
+    text-align: center;
 }
 
-.modal form{
+.editar-bebida-modal form {
 
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
 
-    gap:15px;
+    gap: 15px;
 }
 
-.modal input,
-.modal select{
+.editar-bebida-modal input,
+.editar-bebida-modal select {
 
-    height:52px;
+    height: 52px;
 
-    border:1px solid #d1d5db;
+    border: 1px solid #d1d5db;
 
-    border-radius:12px;
+    border-radius: 12px;
 
-    padding:0 15px;
+    padding: 0 15px;
 
-    font-size:15px;
+    font-size: 15px;
 }
 
-.modal-actions{
+.editar-bebida-modal .modal-actions {
 
-    display:flex;
+    display: flex;
 
-    justify-content:flex-end;
+    justify-content: flex-end;
 
-    gap:15px;
+    gap: 15px;
 
-    margin-top:15px;
+    margin-top: 15px;
 }
 
-.modal-actions button{
+.editar-bebida-modal .modal-actions button {
 
-    padding:12px 22px;
+    padding: 12px 22px;
 
-    border:none;
+    border: none;
 
-    border-radius:10px;
+    border-radius: 10px;
 
-    cursor:pointer;
+    cursor: pointer;
 
-    font-weight:600;
+    font-weight: 600;
 }
 
-.modal-actions button:first-child{
+.editar-bebida-modal .modal-actions button:first-child {
 
-    background:#e5e7eb;
+    background: #e5e7eb;
 
-    color:#374151;
+    color: #374151;
 }
 
-.modal-actions button:last-child{
+.editar-bebida-modal .modal-actions button:last-child {
 
-    background:#d97706;
+    background: #d97706;
 
-    color:white;
+    color: white;
 }
