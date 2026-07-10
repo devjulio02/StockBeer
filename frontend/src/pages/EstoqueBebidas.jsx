@@ -1,10 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import canecaBeer2 from "../assets/canecaBeer2.png";
 import {
-  FaBoxOpen,
-  FaChartBar,
-  FaExchangeAlt,
   FaEdit,
   FaTrash,
   FaSearch,
@@ -13,6 +9,7 @@ import {
 import { listarBebidas, editarBebida, excluirBebida } from "../services/bebidaService";
 import "../styles/estoqueBebidas.css";
 import EditarBebidaModal from "../components/EditarBebidaModal";
+import Sidebar from "../components/Sidebar";
 
 export default function EstoqueBebidas() {
   const navigate = useNavigate();
@@ -130,35 +127,8 @@ export default function EstoqueBebidas() {
 
   return (
     <div className="stock-layout">
-      <aside className="sidebar">
-          <div className="brand">
-            <img src={canecaBeer2} alt="StockBeer" className="logo-sidebar" />
-            <div className="brand-text">
-              <h2>Stock<span>Beer</span></h2>
-              <p>Gestão de Bebidas</p>
-            </div>
-          </div>
 
-        <nav>
-          <a>
-            <FaChartBar /> Dashboard
-          </a>
-          <a className="active">
-            <FaBoxOpen /> Estoque
-          </a>
-          <a>
-            <FaExchangeAlt /> Entradas/Saídas
-          </a>
-        </nav>
-
-        <div className="admin-box">
-          <div className="avatar">A</div>
-          <div>
-            <strong>Admin</strong>
-            <p>admin@stockbeer.com</p>
-          </div>
-        </div>
-      </aside>
+      <Sidebar />
 
       <main className="content">
         <header className="page-header">
