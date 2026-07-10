@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import Input from "../components/Input";
 import Button from "../components/Button";
@@ -10,6 +11,7 @@ import "../styles/login.css";
 export default function Login() {
     const [email, setEmail] =useState("");
     const [senha, setSenha] =useState("");
+    const navigate = useNavigate();
     const [erro, setErro] =useState("");
     const [sucesso, setSucesso] =useState("");
 
@@ -34,6 +36,9 @@ export default function Login() {
         try{
             const response = await api.post("/login", {email, senha});
             setSucesso(response.data.message);
+            setTimeout(() => {
+                navigate("/estoque");
+            }, 1000);
         }catch(error){
             setErro(error.response?.data?.message || "Erro ao realizar login.");
         }
