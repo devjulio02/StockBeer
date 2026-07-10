@@ -83,64 +83,6 @@
     margin-bottom: 25px;
 }
 
-.input-group {
-  display: flex;
-  flex-direction: column;
-
-  margin-bottom: 20px;
-}
-
-.input-group label {
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-
-.input-group input {
-  padding: 18px;
-
-  border: 1px solid #d1d5db;
-
-  border-radius: 8px;
-}
-
-.input-wrapper {
-    position: relative;
-}
-
-.input-icon {
-    position: absolute;
-    left: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #9ca3af;
-    font-size: 18px;
-}
-
-.input-wrapper input {
-    height: 58px;
-    width: 100%;
-    padding: 16px 50px;
-    border-radius: 16px;
-}
-
-.eye-button {
-    position: absolute;
-
-    right: 15px;
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    border: none;
-    background: transparent;
-
-    cursor: pointer;
-
-    color: #9ca3af;
-
-    font-size: 18px;
-}
-
 .copyright {
     text-align: center;
 
@@ -181,4 +123,34 @@
   cursor: pointer;
 
   font-size: 16px;
+}
+
+.btn-cadastrar {
+
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 14px;
+
+    border: 2px solid #d97706;
+
+    background: transparent;
+
+    color: #d97706;
+
+    font-weight: 600;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.btn-cadastrar:hover {
+
+    background: #d97706;
+
+    color: white;
 }
