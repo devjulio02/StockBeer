@@ -154,3 +154,80 @@
 
     color: white;
 }
+
+/* ==========================
+   RESPONSIVIDADE PARA NOTEBOOKS
+========================== */
+
+@media (max-width: 992px) {
+
+  .login-page{
+    padding:20px;
+  }
+
+  .login-card{
+    width:100%;
+    max-width:560px;
+    padding:45px;
+  }
+
+}
+
+/* ==========================
+   RESPONSIVIDADE PARA TABLETS
+========================== */
+
+@media (max-width:768px){
+
+  .login-card{
+    max-width:500px;
+    padding:40px 30px;
+  }
+
+  .logo-container h1{
+    font-size:36px;
+  }
+
+}
+
+/* ==========================
+   RESPONSIVIDADE PARA CELULARES
+========================== */
+@media (max-width:576px){
+
+  .login-page{
+    padding:16px;
+  }
+
+  .login-card{
+    padding:28px 20px;
+  }
+
+  .logo-image{
+    width:70px;
+    height:70px;
+  }
+
+  .logo-icon{
+    width:60px;
+    height:60px;
+    font-size:24px;
+  }
+
+  .logo-container h1{
+    font-size:30px;
+  }
+
+  .logo-container p{
+    font-size:14px;
+  }
+
+  .forgot-container{
+    justify-content:center;
+  }
+
+  .copyright{
+    font-size:12px;
+  }
+
+}

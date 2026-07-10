@@ -138,3 +138,118 @@
   border-radius: 14px;
   object-fit: contain;
 }
+
+/* ==========================
+   RESPONSIVIDADE PARA NOTEBOOKS
+========================== */
+
+@media (max-width: 992px) {
+
+  .form-card {
+
+    width: 100%;
+    max-width: 720px;
+
+    padding: 28px;
+  }
+
+}
+
+/* ==========================
+   RESPONSIVIDADE PARA TABLETS
+========================== */
+
+@media (max-width: 768px) {
+
+  .cadastro-header {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 16px;
+  }
+
+  .back-button {
+
+    width: 100%;
+
+    justify-content: center;
+  }
+
+  .form-card {
+
+    width: 100%;
+
+    padding: 24px;
+  }
+
+  .form-grid {
+
+    grid-template-columns: 1fr;
+  }
+
+  .form-group.full {
+
+    grid-column: span 1;
+  }
+
+  .form-title {
+
+    flex-direction: column;
+
+    text-align: center;
+  }
+
+  .form-actions {
+
+    flex-direction: column;
+  }
+
+  .cancel-button,
+  .save-button {
+
+    width: 100%;
+
+    justify-content: center;
+  }
+
+}
+
+/* ==========================
+   RESPONSIVIDADE PARA CELULARES
+========================== */
+
+@media (max-width: 576px) {
+
+  .cadastro-wrapper {
+
+    margin-top: 18px;
+  }
+
+  .form-card {
+
+    padding: 18px;
+
+    border-radius: 18px;
+  }
+
+  .form-title h2 {
+
+    font-size: 20px;
+  }
+
+  .form-title p {
+
+    font-size: 14px;
+  }
+
+  .form-group input,
+  .form-group select {
+
+    height: 46px;
+
+    font-size: 14px;
+  }
+
+}

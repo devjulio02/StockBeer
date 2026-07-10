@@ -93,3 +93,64 @@
 
     color: white;
 }
+
+/* ==========================
+   RESPONSIVIDADE PARA NOTEBOOKS
+========================== */
+
+@media (max-width: 992px) {
+
+  .editar-bebida-modal {
+
+    width: 90%;
+    max-width: 500px;
+
+  }
+
+}
+
+/* ==========================
+   RESPONSIVIDADE PARA TABLETS
+========================== */
+
+@media (max-width: 768px) {
+
+  .editar-bebida-modal {
+
+    width: 95%;
+
+    padding: 24px;
+
+  }
+
+  .modal-actions {
+
+    flex-direction: column;
+
+  }
+
+  .modal-actions button {
+
+    width: 100%;
+
+  }
+
+}
+
+/* ==========================
+   RESPONSIVIDADE PARA CELULARES
+========================== */
+
+@media (max-width: 576px) {
+
+  .editar-bebida-modal {
+
+    width: 95%;
+
+    padding: 18px;
+
+    border-radius: 14px;
+
+  }
+
+}
