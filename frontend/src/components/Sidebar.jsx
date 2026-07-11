@@ -2,10 +2,12 @@ import { FaBars, FaBoxOpen, FaChartBar, FaExchangeAlt } from "react-icons/fa";
 import canecaBeer2 from "../assets/canecaBeer2.png";
 import "../styles/Sidebar.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
 
     const [collapsed, setCollapsed] = useState(false);
+    const navigate = useNavigate();
 
     return (
          <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
@@ -37,17 +39,17 @@ export default function Sidebar() {
 
             <nav>
 
-                <a>
+                <a onClick={() => navigate("/dashboard")} className="active">
                     <FaChartBar />
                     <span>Dashboard</span>
                 </a>
 
-                <a className="active">
+                <a onClick={() => navigate("/estoque")} className="active">
                     <FaBoxOpen />
                     <span>Estoque</span>
                 </a>
 
-                <a>
+                <a onClick={() => navigate("/entradas/saidas")} className="active">
                     <FaExchangeAlt />
                     <span>Entradas/Saídas</span>
                 </a>
