@@ -1,0 +1,175 @@
+/* ==========================
+   PAINEL DE ALERTAS
+========================== */
+
+.alert-panel{
+
+    background:#ffffff;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    box-shadow:0 2px 12px rgba(15,23,42,.06);
+
+}
+
+.alert-panel__header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px 24px;
+
+    border-bottom:1px solid #eef2f7;
+
+}
+
+.alert-panel__title{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:#1f2937;
+
+    margin:0;
+
+}
+
+.alert-panel__sub{
+
+    margin-top:4px;
+
+    font-size:13px;
+
+    color:#64748b;
+
+}
+
+.alert-panel__badge{
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+.alert-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.alert-table thead{
+
+    background:#fafbfc;
+
+}
+
+.alert-table th{
+
+    text-align:left;
+
+    padding:14px 24px;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.06em;
+
+    color:#94a3b8;
+
+}
+
+.alert-table tbody tr{
+
+    transition:.15s;
+
+}
+
+.alert-table tbody tr:nth-child(even){
+
+    background:#fafbfc;
+
+}
+
+.alert-table tbody tr:hover{
+
+    background:#fff8ec;
+
+}
+
+.alert-table td{
+
+    padding:16px 24px;
+
+    border-top:1px solid #eef2f7;
+
+    color:#64748b;
+
+    font-size:13px;
+
+}
+
+.alert-product{
+
+    font-weight:700;
+
+    color:#1f2937;
+
+}
+
+.alert-critical{
+
+    color:#dc2626;
+
+    font-weight:700;
+
+}
+
+.alert-suggestion{
+
+    display:inline-block;
+
+    padding:4px 10px;
+
+    border-radius:999px;
+
+    background:#fff3dc;
+
+    color:#d89000;
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+.alert-empty{
+
+    text-align:center;
+
+    padding:40px;
+
+    color:#94a3b8;
+
+    font-size:14px;
+
+}
