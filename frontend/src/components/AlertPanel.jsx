@@ -1,4 +1,5 @@
 import "../styles/AlertPanel.css";
+import { FaExclamationTriangle } from "react-icons/fa";
 
 export default function AlertPanel({ alertas }) {
 
@@ -11,7 +12,8 @@ export default function AlertPanel({ alertas }) {
                 <div>
 
                     <h2 className="alert-panel__title">
-                        ⚠ Alertas de Reposição
+                        <FaExclamationTriangle className="alert-icon"/>
+                        Alertas de Reposição
                     </h2>
 
                     <p className="alert-panel__sub">
@@ -28,100 +30,122 @@ export default function AlertPanel({ alertas }) {
 
             </div>
 
-            <table className="alert-table">
+            <div className="alert-table-wrapper">
+                <table className="alert-table">
 
-                <thead>
+                    <thead>
 
-                    <tr>
+                        <tr>
 
-                        <th>Produto</th>
-                        <th>Categoria</th>
-                        <th>Qtd. Atual</th>
-                        <th>Estoque Mínimo</th>
-                        <th>Sugestão</th>
-                        <th>Status</th>
+                            <th>Produto</th>
+                            <th>Categoria</th>
+                            <th>Qtd. Atual</th>
+                            <th>Estoque Mínimo</th>
+                            <th>Sugestão</th>
+                            <th>Status</th>
 
-                    </tr>
+                        </tr>
 
-                </thead>
+                    </thead>
 
-                <tbody>
+                    <tbody>
 
-                    {
+                        {
 
-                        alertas.length === 0 ? (
+                            alertas.length === 0 ? (
 
-                            <tr>
+                                <tr>
 
-                                <td
-                                    colSpan="6"
-                                    className="alert-empty"
-                                >
+                                    <td
+                                        colSpan="6"
+                                        className="alert-empty"
+                                    >
 
-                                    Nenhum alerta de reposição.
-
-                                </td>
-
-                            </tr>
-
-                        ) : (
-
-                            alertas.map((item) => (
-
-                                <tr key={item.id}>
-
-                                    <td className="alert-product">
-
-                                        {item.produto}
-
-                                    </td>
-
-                                    <td>
-
-                                        {item.categoria}
-
-                                    </td>
-
-                                    <td className="alert-critical">
-
-                                        {item.quantidade_atual}
-
-                                    </td>
-
-                                    <td>
-
-                                        {item.estoque_minimo}
-
-                                    </td>
-
-                                    <td>
-
-                                        <span className="alert-suggestion">
-
-                                            +{item.sugestao_reposicao}
-
-                                        </span>
-
-                                    </td>
-
-                                    <td>
-
-                                        {item.percentual_estoque}%
+                                        Nenhum alerta de reposição.
 
                                     </td>
 
                                 </tr>
 
-                            ))
+                            ) : (
 
-                        )
+                                alertas.map((item) => (
 
-                    }
+                                    <tr key={item.id}>
 
-                </tbody>
+                                        <td className="alert-product">
 
-            </table>
+                                            {item.produto}
 
+                                        </td>
+
+                                        <td>
+
+                                            {item.categoria}
+
+                                        </td>
+
+                                        <td className="alert-critical">
+
+                                            {item.quantidade_atual} un.
+
+                                        </td>
+
+                                        <td>
+
+                                            {item.estoque_minimo} un.
+
+                                        </td>
+
+                                        <td>
+
+                                            <span className="alert-suggestion">
+
+                                                + {item.sugestao_reposicao} un.
+
+                                            </span>
+
+                                        </td>
+
+                                        <td>
+
+                                            <div className="status-progress">
+
+                                                <div className="status-progress__bar">
+
+                                                    <div
+                                                        className="status-progress__fill"
+                                                        style={{
+                                                            width: `${item.percentual_estoque}%`
+                                                        }}
+                                                    />
+
+                                                </div>
+
+                                                <span className="status-badge">
+
+                                                    {item.percentual_estoque}%
+
+                                                </span>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                ))
+
+                            )
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+            
         </section>
 
     );

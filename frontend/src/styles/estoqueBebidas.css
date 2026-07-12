@@ -22,13 +22,14 @@
 }
 
 .page-header h1 {
-  font-size: 28px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 700;
   margin: 0;
 }
 
 .page-header p {
   color: #64748b;
+  font-size:13px;
   margin: 4px 0 0;
 }
 
@@ -40,7 +41,7 @@
   background: #d89000;
   color: white;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 14px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -105,11 +106,12 @@ th {
   text-align: left;
   padding: 18px 24px;
   color: #94a3b8;
-  font-size: 13px;
+  font-size: 11px;
   text-transform: uppercase;
 }
 
 td {
+  font-size:13px;
   padding: 18px 24px;
   border-top: 1px solid #eef2f7;
   color: #64748b;
@@ -134,7 +136,7 @@ td {
 .qty {
   padding: 7px 12px;
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 800;
 }
 

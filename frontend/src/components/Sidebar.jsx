@@ -2,7 +2,7 @@ import { FaBars, FaBoxOpen, FaChartBar, FaExchangeAlt } from "react-icons/fa";
 import canecaBeer2 from "../assets/canecaBeer2.png";
 import "../styles/Sidebar.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import MovementModal from "./MovementModal";
 
 export default function Sidebar() {
@@ -10,6 +10,7 @@ export default function Sidebar() {
     const [collapsed, setCollapsed] = useState(false);
     const [modalAberto, setModalAberto] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
 
     return (
         <>
@@ -42,17 +43,17 @@ export default function Sidebar() {
 
                 <nav>
 
-                    <a onClick={() => navigate("/dashboard")} className="active">
+                    <a onClick={() => navigate("/dashboard")} className={location.pathname === "/dashboard" ? "active" : ""}>
                         <FaChartBar />
                         <span>Dashboard</span>
                     </a>
 
-                    <a onClick={() => navigate("/estoque")} className="active">
+                    <a onClick={() => navigate("/estoque")} className={location.pathname === "/estoque" ? "active" : ""}>
                         <FaBoxOpen />
                         <span>Estoque</span>
                     </a>
 
-                    <a onClick={() => setModalAberto(true)} className="active">
+                    <a onClick={() => setModalAberto(true)} className={location.pathname === "/entradas/saidas" ? "active" : ""}>
                         <FaExchangeAlt />
                         <span>Entradas/Saídas</span>
                     </a>

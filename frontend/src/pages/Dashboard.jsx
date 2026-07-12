@@ -16,6 +16,17 @@ export default function Dashboard() {
     const [painel, setPainel] = useState(null);
     const [carregando, setCarregando] = useState(true);
 
+    const dataAtual = new Date().toLocaleDateString("pt-BR", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
+
+    const dataFormatada =
+        dataAtual.charAt(0).toUpperCase() +
+        dataAtual.slice(1);
+
     useEffect(() => {
 
         async function carregarPainel() {
@@ -66,13 +77,13 @@ export default function Dashboard() {
 
                         <p>
 
-                            Visão geral do estoque
+                            Visão geral do estoque — {dataFormatada}
 
                         </p>
 
                     </div>
 
-                    <button className="dashboard-bell-btn">
+                    <button className="notification-button">
 
                         🔔
 

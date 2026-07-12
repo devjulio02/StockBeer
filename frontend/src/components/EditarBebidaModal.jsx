@@ -58,6 +58,13 @@ export default function EditarBebidaModal({
                 <h2>Editar Bebida</h2>
 
                 <form onSubmit={handleSubmit}>
+
+                     <label className="form-label">
+
+                        Nome da Bebida
+
+                    </label>
+
                     <input
                         name="nome"
                         value={form.nome}
@@ -66,6 +73,12 @@ export default function EditarBebidaModal({
                         required
                     />
 
+                     <label className="form-label">
+
+                        Marca
+
+                    </label>
+
                     <input
                         name="marca"
                         value={form.marca}
@@ -73,6 +86,12 @@ export default function EditarBebidaModal({
                         placeholder="Marca"
                         required
                     />
+
+                     <label className="form-label">
+
+                        Categoria
+
+                    </label>
 
                     <select
                         name="categoria"
@@ -88,6 +107,12 @@ export default function EditarBebidaModal({
                         <option value="Água">Água</option>
                     </select>
 
+                     <label className="form-label">
+
+                        Preço
+
+                    </label>
+
                     <input
                         type="number"
                         min="0"
@@ -98,6 +123,12 @@ export default function EditarBebidaModal({
                         required
                     />
 
+                     <label className="form-label">
+
+                        Quantidade em estoque
+
+                    </label>
+
                     <input
                         type="number"
                         min="0"
@@ -106,6 +137,12 @@ export default function EditarBebidaModal({
                         onChange={handleChange}
                         required
                     />
+
+                     <label className="form-label">
+
+                        Estoque mínimo
+
+                    </label>
 
                     <input
                         type="number"
