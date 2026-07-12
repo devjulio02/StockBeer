@@ -1,12 +1,11 @@
 import "../styles/movementModal.css";
 import { useEffect, useState } from "react";
 
-import { listarProdutos } from "../services/movementacaoService";
-
-import {
+import { 
+    listarProdutos, 
     registrarEntrada,
-    registrarSaida
-} from "../services/movementService";
+    registrarSaida 
+} from "../services/movementacaoService";
 
 import {
     FaTimes,

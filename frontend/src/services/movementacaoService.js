@@ -1,18 +1,36 @@
-import axios from "axios";
-
-const API = "http://localhost:5000";
+import { api } from "./api";
 
 export async function listarProdutos() {
 
-    const resposta = await axios.get(`${API}/bebidas`);
+    const resposta = await api.get("/bebidas");
 
     return resposta.data.bebidas;
 
 }
 
-export async function registrarMovimentacao(dados) {
+export async function registrarEntrada(bebidaId, quantidade) {
 
-    const resposta = await axios.post(`${API}/movimentacoes`, dados);
+    const resposta = await api.post("/estoque/entrada", {
+
+        bebida_id: bebidaId,
+        quantidade: Number(quantidade),
+        usuario_id: 1
+
+    });
+
+    return resposta.data;
+
+}
+
+export async function registrarSaida(bebidaId, quantidade) {
+
+    const resposta = await api.post("/estoque/saida", {
+
+        bebida_id: bebidaId,
+        quantidade: Number(quantidade),
+        usuario_id: 1
+
+    });
 
     return resposta.data;
 
