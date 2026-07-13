@@ -1,0 +1,164 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0,0,0,.45);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    overflow-y: auto;
+
+    z-index: 1000;
+}
+
+.editar-bebida-modal {
+
+    width: 520px;
+    max-width: 90%;
+
+    max-height: calc(100vh - 40px);
+
+    overflow-y: auto;
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    box-shadow: 0 15px 45px rgba(0,0,0,.25);
+}
+
+.editar-bebida-modal h2 {
+
+    margin-bottom: 25px;
+
+    color: #1f2937;
+
+    text-align: center;
+}
+
+.editar-bebida-modal form {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.editar-bebida-modal input,
+.editar-bebida-modal select {
+
+    height: 52px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 12px;
+
+    padding: 0 15px;
+
+    font-size: 15px;
+}
+
+.editar-bebida-modal .modal-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 15px;
+
+    margin-top: 15px;
+}
+
+.editar-bebida-modal .modal-actions button {
+
+    padding: 12px 22px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.editar-bebida-modal .modal-actions button:first-child {
+
+    background: #e5e7eb;
+
+    color: #374151;
+}
+
+.editar-bebida-modal .modal-actions button:last-child {
+
+    background: #d97706;
+
+    color: white;
+}
+
+/* ==========================
+   RESPONSIVIDADE PARA NOTEBOOKS
+========================== */
+
+@media (max-width: 992px) {
+
+  .editar-bebida-modal {
+
+    width: 90%;
+    max-width: 500px;
+
+  }
+
+}
+
+/* ==========================
+   RESPONSIVIDADE PARA TABLETS
+========================== */
+
+@media (max-width: 768px) {
+
+  .editar-bebida-modal {
+
+    width: 95%;
+
+    padding: 24px;
+
+  }
+
+  .modal-actions {
+
+    flex-direction: column;
+
+  }
+
+  .modal-actions button {
+
+    width: 100%;
+
+  }
+
+}
+
+/* ==========================
+   RESPONSIVIDADE PARA CELULARES
+========================== */
+
+@media (max-width: 576px) {
+
+  .editar-bebida-modal {
+
+    width: 95%;
+
+    padding: 18px;
+
+    border-radius: 14px;
+
+  }
+
+}

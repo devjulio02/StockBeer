@@ -1,15 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  FaBoxOpen,
-  FaChartBar,
-  FaExchangeAlt,
-  FaSave,
-  FaArrowLeft,
-  FaPlus,
-} from "react-icons/fa";
+import { FaSave, FaArrowLeft, FaPlus } from "react-icons/fa";
 import { cadastrarBebida } from "../services/bebidaService";
 import "../styles/cadastroBebidas.css";
+import Sidebar from "../components/Sidebar";
 import canecaBeer2 from "../assets/canecaBeer2.png";
 
 export default function CadastroBebidas() {
@@ -50,44 +44,8 @@ export default function CadastroBebidas() {
 
   return (
     <div className="stock-layout">
-      <aside className="sidebar">
-        <div className="brand">
-          <img src={canecaBeer2} alt="StockBeer" className="logo-sidebar" />
-
-          <div className="brand-text">
-            <h2>
-              Stock<span>Beer</span>
-            </h2>
-            <p>Gestão de Bebidas</p>
-          </div>
-        </div>
-
-        <nav>
-          <a>
-            <FaChartBar /> Dashboard
-          </a>
-
-          <a onClick={() => navigate("/estoque")}>
-            <FaBoxOpen /> Estoque
-          </a>
-
-          <a className="active">
-            <FaPlus /> Cadastrar Bebida
-          </a>
-
-          <a>
-            <FaExchangeAlt /> Entradas/Saídas
-          </a>
-        </nav>
-
-        <div className="admin-box">
-          <div className="avatar">A</div>
-          <div>
-            <strong>Admin</strong>
-            <p>admin@stockbeer.com</p>
-          </div>
-        </div>
-      </aside>
+      
+      <Sidebar />
 
       <main className="content cadastro-content">
         <header className="page-header cadastro-header">

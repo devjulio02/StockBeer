@@ -1,17 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import canecaBeer2 from "../assets/canecaBeer2.png";
 import {
-  FaBoxOpen,
-  FaChartBar,
-  FaExchangeAlt,
   FaEdit,
   FaTrash,
   FaSearch,
   FaPlus,
 } from "react-icons/fa";
-import { listarBebidas } from "../services/bebidaService";
+import { listarBebidas, editarBebida, excluirBebida } from "../services/bebidaService";
 import "../styles/estoqueBebidas.css";
+import EditarBebidaModal from "../components/EditarBebidaModal";
+import Sidebar from "../components/Sidebar";
 
 export default function EstoqueBebidas() {
   const navigate = useNavigate();
@@ -21,6 +19,8 @@ export default function EstoqueBebidas() {
   const [categoria, setCategoria] = useState("");
   const [ordenar, setOrdenar] = useState("id");
   const [carregando, setCarregando] = useState(false);
+  const [modalAberto, setModalAberto] = useState(false);
+  const [bebidaSelecionada, setBebidaSelecionada] = useState(null);
 
   const carregarBebidas = useCallback(async () => {
     try {
@@ -46,6 +46,32 @@ export default function EstoqueBebidas() {
     }
   }, [busca, categoria, ordenar]);
 
+  async function salvarEdicao(dados) {
+    try {
+
+        await editarBebida(
+            bebidaSelecionada.id,
+            dados
+        );
+
+        await carregarBebidas();
+
+        setModalAberto(false);
+
+        setBebidaSelecionada(null);
+
+        alert("Bebida atualizada com sucesso!");
+
+    } catch (error) {
+
+        alert(
+            error.response?.data?.message ||
+            "Erro ao atualizar bebida."
+        );
+
+    }
+  }
+
   useEffect(() => {
     const timer = setTimeout(() => {
       carregarBebidas();
@@ -57,6 +83,33 @@ export default function EstoqueBebidas() {
   function buscarSubmit(e) {
     e.preventDefault();
     carregarBebidas();
+  }
+
+  async function handleExcluir(id) {
+
+    const confirmar = window.confirm(
+        "Deseja realmente excluir esta bebida?"
+    );
+
+    if (!confirmar) return;
+
+    try {
+
+        await excluirBebida(id);
+
+        alert("Bebida excluída com sucesso!");
+
+        carregarBebidas();
+
+    } catch (error) {
+
+        alert(
+            error.response?.data?.message ||
+            "Erro ao excluir bebida."
+        );
+
+    }
+
   }
 
   function formatarPreco(valor) {
@@ -74,35 +127,8 @@ export default function EstoqueBebidas() {
 
   return (
     <div className="stock-layout">
-      <aside className="sidebar">
-          <div className="brand">
-            <img src={canecaBeer2} alt="StockBeer" className="logo-sidebar" />
-            <div className="brand-text">
-              <h2>Stock<span>Beer</span></h2>
-              <p>Gestão de Bebidas</p>
-            </div>
-          </div>
 
-        <nav>
-          <a>
-            <FaChartBar /> Dashboard
-          </a>
-          <a className="active">
-            <FaBoxOpen /> Estoque
-          </a>
-          <a>
-            <FaExchangeAlt /> Entradas/Saídas
-          </a>
-        </nav>
-
-        <div className="admin-box">
-          <div className="avatar">A</div>
-          <div>
-            <strong>Admin</strong>
-            <p>admin@stockbeer.com</p>
-          </div>
-        </div>
-      </aside>
+      <Sidebar />
 
       <main className="content">
         <header className="page-header">
@@ -214,10 +240,20 @@ export default function EstoqueBebidas() {
 
                     <td>
                       <div className="actions">
-                        <button type="button" title="Editar">
+                        <button 
+                          type="button" 
+                          title="Editar" 
+                          onClick={() => {
+                            setBebidaSelecionada(bebida);
+                            setModalAberto(true);
+                          }}>
                           <FaEdit />
                         </button>
-                        <button type="button" title="Excluir">
+
+                        <button 
+                          type="button" 
+                          title="Excluir" 
+                          onClick={() => handleExcluir(bebida.id)}>
                           <FaTrash />
                         </button>
                       </div>
@@ -230,6 +266,23 @@ export default function EstoqueBebidas() {
 
           <footer>Exibindo {bebidas.length} produtos</footer>
         </section>
+        <EditarBebidaModal
+
+          aberto={modalAberto}
+
+          bebida={bebidaSelecionada}
+
+          onClose={() => {
+
+              setModalAberto(false);
+
+              setBebidaSelecionada(null);
+
+          }}
+
+          onSalvar={salvarEdicao}
+
+        />
       </main>
     </div>
   );

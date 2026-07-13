@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { FaEye, FaEyeSlash, FaEnvelope, FaLock } from "react-icons/fa";
+import "../styles/Input.css";
+import { FaEye, FaEyeSlash, FaEnvelope, FaLock, FaUser } from "react-icons/fa";
  
 export default function Input({
   label,
+  name,
   type = "text",
   placeholder,
   value,
@@ -13,6 +15,7 @@ export default function Input({
     const isPassword = type === "password";
 
     const getIcon = () => {
+        if (type === "text") return <FaUser />;
         if (type === "email") return <FaEnvelope />;
         if (type === "password") return <FaLock />;
         return null;
