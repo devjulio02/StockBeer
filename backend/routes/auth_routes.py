@@ -1,9 +1,8 @@
-# routes/auth_routes.py
-
 from flask import Blueprint, request, jsonify
 from services.auth_service import AuthService
 
 auth_bp = Blueprint("auth", __name__)
+
 
 @auth_bp.route("/login", methods=["POST"])
 def login():
@@ -13,12 +12,13 @@ def login():
     email = dados.get("email")
     senha = dados.get("senha")
 
-    autenticado = AuthService.autenticar(email, senha)
+    usuario = AuthService.autenticar(email, senha)
 
-    if autenticado:
+    if usuario:
         return jsonify({
             "success": True,
-            "message": "Login realizado com sucesso"
+            "message": "Login realizado com sucesso",
+            "usuario": usuario
         }), 200
 
     return jsonify({
