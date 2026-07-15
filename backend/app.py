@@ -7,6 +7,7 @@ from routes.cadastro_routes import cadastro_bp
 from routes.entrada_routes import entrada_bp
 from routes.saida_routes import saida_bp
 from routes.painel_routes import painel_bp
+from routes.recuperacao_routes import recuperacao_bp
 
 app = Flask(__name__)
 
@@ -18,6 +19,7 @@ app.register_blueprint(cadastro_bp)
 app.register_blueprint(entrada_bp)
 app.register_blueprint(saida_bp)
 app.register_blueprint(painel_bp)
+app.register_blueprint(recuperacao_bp)
 
 
 if __name__ == "__main__":
