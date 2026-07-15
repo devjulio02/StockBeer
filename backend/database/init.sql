@@ -83,3 +83,16 @@ INSERT INTO usuarios (nome, email, senha)
 VALUES
     ('Administrador', 'admin@stockbeer.com', '123456')
 ON CONFLICT (email) DO NOTHING;
+
+CREATE TABLE IF NOT EXISTS recuperacao_senha (
+    id SERIAL PRIMARY KEY,
+    usuario_id INTEGER NOT NULL,
+    token VARCHAR(255) UNIQUE NOT NULL,
+    expira_em TIMESTAMP NOT NULL,
+    utilizado BOOLEAN DEFAULT FALSE,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_recuperacao_usuario
+        FOREIGN KEY (usuario_id)
+        REFERENCES usuarios(id)
+);
