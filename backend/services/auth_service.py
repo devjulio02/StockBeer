@@ -5,12 +5,20 @@ class AuthService:
 
     @staticmethod
     def autenticar(email, senha):
+
         if not email or not senha:
-            return False
+            return None
 
         usuario = AuthRepository.buscar_por_email(email)
 
         if not usuario:
-            return False
+            return None
 
-        return usuario["senha"] == senha
+        if usuario["senha"] != senha:
+            return None
+
+        return {
+            "id": usuario["id"],
+            "nome": usuario["nome"],
+            "email": usuario["email"]
+        }
