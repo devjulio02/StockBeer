@@ -11,6 +11,8 @@ import { api } from "../services/api";
 
 import "../styles/login.css";
 
+import RecuperacaoSenhaModal from "../components/RecuperacaoSenhaModal";
+
 
 export default function Login() {
     const [email, setEmail] =useState("");
@@ -19,6 +21,7 @@ export default function Login() {
     const [erro, setErro] =useState("");
     const [sucesso, setSucesso] =useState("");
     const [modalCadastroAberto, setModalCadastroAberto] = useState(false);
+    const [modalRecuperacaoAberto, setModalRecuperacaoAberto] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -89,9 +92,9 @@ export default function Login() {
             )}
 
             <div className="forgot-container">
-                <a href="#" className="forgot-password">
+                <button type="button" className="forgot-password" onClick={() => setModalRecuperacaoAberto(true)}>
                     Esqueceu a senha?
-                </a>
+                </button>
             </div>
             
 
@@ -121,6 +124,12 @@ export default function Login() {
 
         />
 
+        <RecuperacaoSenhaModal
+
+            aberto={modalRecuperacaoAberto}
+            
+            onClose={() => setModalRecuperacaoAberto(false)}
+        />
     </div>
   );
 }
