@@ -1,5 +1,6 @@
 from repositories.saida_repository import SaidaRepository
-
+from services.notificacao_service import NotificacaoService
+from repositories.notificacao_repository import NotificacaoRepository
 
 class SaidaService:
 
@@ -17,6 +18,36 @@ class SaidaService:
 
         if resultado.get("erro") == "estoque_insuficiente":
             return False, f"Estoque insuficiente. Estoque atual: {resultado['estoque_atual']}.", None
+
+        NotificacaoService.criar(
+            mensagem=(
+                f'Saída de {resultado["movimentacao"]["quantidade"]} '
+                f'unidades da bebida "{resultado["bebida"]["nome"]}".'
+            ),
+            tipo="saida",
+            origem_id=resultado["movimentacao"]["id"],
+            bebida_id=resultado["bebida"]["id"]
+        )
+
+        if (
+            resultado["bebida"]["quantidade_estoque"]
+            <=
+            resultado["bebida"]["estoque_minimo"]
+        ):
+
+            if not NotificacaoRepository.existe_alerta_estoque_baixo(
+                resultado["bebida"]["id"]
+            ):
+
+                NotificacaoService.criar(
+                    mensagem=(
+                        f'Estoque da bebida "{resultado["bebida"]["nome"]}" '
+                        f'ficou abaixo do mínimo.'
+                    ),
+                    tipo="estoque_baixo",
+                    bebida_id=resultado["bebida"]["id"]
+                )
+
 
         return True, "Saída de estoque registrada com sucesso", resultado
 
