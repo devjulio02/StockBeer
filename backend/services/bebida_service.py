@@ -1,6 +1,7 @@
 from decimal import Decimal, InvalidOperation
 
 from repositories.bebida_repository import BebidaRepository
+from services.notificacao_service import NotificacaoService
 
 
 class BebidaService:
@@ -13,6 +14,12 @@ class BebidaService:
             return False, mensagem, None
 
         bebida = BebidaRepository.cadastrar(dados_validados)
+
+        NotificacaoService.criar(
+            mensagem=f'Nova bebida "{bebida["nome"]}" cadastrada.',
+            tipo="cadastro_bebida",
+            bebida_id=bebida["id"]
+        )
 
         return True, "Bebida cadastrada com sucesso", bebida
 
