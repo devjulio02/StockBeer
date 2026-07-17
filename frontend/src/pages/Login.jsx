@@ -40,6 +40,12 @@ export default function Login() {
 
         try{
             const response = await api.post("/login", {email, senha});
+            
+            localStorage.setItem(
+                "usuario",
+                JSON.stringify(response.data.usuario)
+            );
+            
             setSucesso(response.data.message);
             setTimeout(() => {
                 navigate("/estoque");

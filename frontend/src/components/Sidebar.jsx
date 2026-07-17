@@ -1,7 +1,7 @@
 import { FaBars, FaBoxOpen, FaChartBar, FaExchangeAlt } from "react-icons/fa";
 import canecaBeer2 from "../assets/canecaBeer2.png";
 import "../styles/Sidebar.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import MovementModal from "./MovementModal";
 
@@ -9,8 +9,17 @@ export default function Sidebar() {
 
     const [collapsed, setCollapsed] = useState(false);
     const [modalAberto, setModalAberto] = useState(false);
+    const [usuario, setUsuario] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
+
+    useEffect(() => {
+        const usuarioSalvo = localStorage.getItem("usuario");
+
+        if (usuarioSalvo) {
+            setUsuario(JSON.parse(usuarioSalvo));
+        }
+    }, []);
 
     return (
         <>
@@ -63,12 +72,12 @@ export default function Sidebar() {
                 <div className="admin-box">
 
                     <div className="avatar">
-                        A
+                        {usuario?.nome?.charAt(0).toUpperCase() || "A"}
                     </div>
 
                     <div className="admin-info">
-                        <strong>Admin</strong>
-                        <p>admin@stockbeer.com</p>
+                        <strong>{usuario?.nome}</strong>
+                        <p>{usuario?.email}</p>
                     </div>
 
                 </div>
