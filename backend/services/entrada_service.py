@@ -1,5 +1,5 @@
 from repositories.entrada_repository import EntradaRepository
-
+from services.notificacao_service import NotificacaoService
 
 class EntradaService:
 
@@ -14,6 +14,16 @@ class EntradaService:
 
         if not resultado:
             return False, "Bebida não encontrada.", None
+        
+        NotificacaoService.criar(
+            mensagem=(
+                f'Entrada de {resultado["movimentacao"]["quantidade"]} '
+                f'unidades da bebida "{resultado["bebida"]["nome"]}".'
+            ),
+            tipo="entrada",
+            origem_id=resultado["movimentacao"]["id"],
+            bebida_id=resultado["bebida"]["id"]
+        )
 
         return True, "Entrada de estoque registrada com sucesso", resultado
 
