@@ -61,8 +61,10 @@ CREATE TABLE IF NOT EXISTS movimentacoes (
 CREATE TABLE IF NOT EXISTS alertas (
     id SERIAL PRIMARY KEY,
     mensagem TEXT NOT NULL,
+    tipo VARCHAR(30),
+    origem_id INTEGER,
     resolvido BOOLEAN DEFAULT FALSE,
-    bebida_id INTEGER NOT NULL,
+    bebida_id INTEGER,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_alertas_bebidas
