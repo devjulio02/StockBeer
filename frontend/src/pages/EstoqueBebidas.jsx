@@ -142,14 +142,14 @@ export default function EstoqueBebidas() {
             className="btn-nova-bebida"
             onClick={() => navigate("/cadastro-bebidas")}
           >
-            <FaPlus />
+            <FaPlus aria-hidden="true" />
             Nova Bebida
           </button>
         </header>
 
         <section className="filters">
           <form className="search-box" onSubmit={buscarSubmit}>
-            <FaSearch />
+            <FaSearch aria-hidden="true"/>
             <input
               type="text"
               placeholder="Buscar produto, categoria ou marca..."
@@ -194,7 +194,7 @@ export default function EstoqueBebidas() {
             <tbody>
               {carregando ? (
                 <tr>
-                  <td colSpan="7" className="empty">
+                  <td colSpan="7" className="empty" role="status" aria-live="polite">
                     Carregando...
                   </td>
                 </tr>
@@ -242,19 +242,21 @@ export default function EstoqueBebidas() {
                       <div className="actions">
                         <button 
                           type="button" 
-                          title="Editar" 
+                          title="Editar"
+                          aria-label="Editar bebida" 
                           onClick={() => {
                             setBebidaSelecionada(bebida);
                             setModalAberto(true);
                           }}>
-                          <FaEdit />
+                          <FaEdit aria-hidden="true" />
                         </button>
 
                         <button 
                           type="button" 
                           title="Excluir" 
+                          aria-label="Excluir bebida"
                           onClick={() => handleExcluir(bebida.id)}>
-                          <FaTrash />
+                          <FaTrash aria-hidden="true" />
                         </button>
                       </div>
                     </td>

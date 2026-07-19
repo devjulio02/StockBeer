@@ -92,13 +92,14 @@ export default function EditarBebidaModal({
 
                 <form onSubmit={handleSubmit}>
 
-                     <label className="form-label">
+                     <label className="form-label" htmlFor="nome">
 
                         Nome da Bebida
 
                     </label>
 
                     <input
+                        id="nome"
                         name="nome"
                         value={form.nome}
                         onChange={handleChange}
@@ -106,13 +107,14 @@ export default function EditarBebidaModal({
                         required
                     />
 
-                     <label className="form-label">
+                     <label className="form-label" htmlFor="marca">
 
                         Marca
 
                     </label>
 
                     <input
+                        id="marca"
                         name="marca"
                         value={form.marca}
                         onChange={handleChange}
@@ -120,13 +122,14 @@ export default function EditarBebidaModal({
                         required
                     />
 
-                     <label className="form-label">
+                     <label className="form-label" htmlFor="categoria">
 
                         Categoria
 
                     </label>
 
                     <select
+                        id="categoria"
                         name="categoria"
                         value={form.categoria}
                         onChange={handleChange}
@@ -140,13 +143,14 @@ export default function EditarBebidaModal({
                         <option value="Água">Água</option>
                     </select>
 
-                     <label className="form-label">
+                     <label className="form-label" htmlFor="preco">
 
                         Preço
 
                     </label>
 
                     <input
+                        id="preco"
                         type="number"
                         min="0"
                         step="0.01"
@@ -156,13 +160,14 @@ export default function EditarBebidaModal({
                         required
                     />
 
-                     <label className="form-label">
+                     <label className="form-label" htmlFor="quantidade">
 
                         Quantidade em estoque
 
                     </label>
 
                     <input
+                        id="quantidade"
                         type="number"
                         min="0"
                         name="quantidade_estoque"
@@ -171,13 +176,14 @@ export default function EditarBebidaModal({
                         required
                     />
 
-                     <label className="form-label">
+                     <label className="form-label" htmlFor="estoque">
 
                         Estoque mínimo
 
                     </label>
 
                     <input
+                        id="estoque"
                         type="number"
                         min="0"
                         name="estoque_minimo"

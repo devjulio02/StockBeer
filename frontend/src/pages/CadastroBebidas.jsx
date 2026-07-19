@@ -72,8 +72,9 @@ export default function CadastroBebidas() {
 
             <div className="form-grid">
               <div className="form-group full">
-                <label>Nome da bebida</label>
+                <label htmlFor="nome-bebida">Nome da bebida</label>
                 <input
+                  id="nome-bebida"
                   name="nome"
                   value={form.nome}
                   onChange={handleChange}
@@ -83,8 +84,9 @@ export default function CadastroBebidas() {
               </div>
 
               <div className="form-group">
-                <label>Marca</label>
+                <label htmlFor="marca">Marca</label>
                 <input
+                  id="marca"
                   name="marca"
                   value={form.marca}
                   onChange={handleChange}
@@ -94,8 +96,9 @@ export default function CadastroBebidas() {
               </div>
 
               <div className="form-group">
-                <label>Categoria</label>
+                <label htmlFor="categoria">Categoria</label>
                 <select
+                  id="categoria"
                   name="categoria"
                   value={form.categoria}
                   onChange={handleChange}
@@ -111,8 +114,9 @@ export default function CadastroBebidas() {
               </div>
 
               <div className="form-group">
-                <label>Preço</label>
+                <label htmlFor="preco">Preço</label>
                 <input
+                  id="preco"
                   name="preco"
                   type="number"
                   step="0.01"
@@ -125,8 +129,9 @@ export default function CadastroBebidas() {
               </div>
 
               <div className="form-group">
-                <label>Quantidade em estoque</label>
+                <label htmlFor="quantidade-estoque">Quantidade em estoque</label>
                 <input
+                  id="quantidade-estoque"
                   name="quantidade_estoque"
                   type="number"
                   min="0"
@@ -138,8 +143,9 @@ export default function CadastroBebidas() {
               </div>
 
               <div className="form-group">
-                <label>Estoque mínimo</label>
+                <label htmlFor="estoque-minimo">Estoque mínimo</label>
                 <input
+                  id="estoque-minimo"
                   name="estoque_minimo"
                   type="number"
                   min="0"

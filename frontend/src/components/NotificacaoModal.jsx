@@ -120,7 +120,11 @@ export default function NotificacaoModal({ aberto, onClose, notificacoes, atuali
 
                                     <small className="notificacao-data">
 
-                                        🕒 {formatarData(notificacao.criado_em)}
+                                        <span aria-hidden="true">
+                                            🕒 
+                                        </span>
+                                        {" "}
+                                        {formatarData(notificacao.criado_em)}
 
                                     </small>
 

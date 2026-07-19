@@ -163,7 +163,7 @@ export default function MovementModal({ aberto, onClose }) {
 
                         <div className="modal-header__icon-wrap">
 
-                            <FaExchangeAlt />
+                            <FaExchangeAlt aria-hidden="true" />
 
                         </div>
 
@@ -202,13 +202,13 @@ export default function MovementModal({ aberto, onClose }) {
 
                     <div className="form-field">
 
-                        <label className="form-label">
+                        <label className="form-label" htmlFor="produto">
 
                             Selecionar Produto
 
                         </label>
 
-                        <select className="dropdown-trigger" value={produtoSelecionado} onChange={(e) => setProdutoSelecionado(e.target.value)}>
+                        <select id="produto" className="dropdown-trigger" value={produtoSelecionado} onChange={(e) => setProdutoSelecionado(e.target.value)}>
 
                             <option value="">
 
@@ -302,13 +302,14 @@ export default function MovementModal({ aberto, onClose }) {
 
                     <div className="form-field">
 
-                        <label className="form-label">
+                        <label className="form-label" htmlFor="quantidade">
 
                             Quantidade
 
                         </label>
 
                         <input
+                            id="quantidade"
                             className="qty-input"
                             type="number"
                             min="1"

@@ -118,7 +118,7 @@ export default function Dashboard() {
                         }
                         aria-haspopup="dialog"
                         aria-expanded={modalAberto}
-                        aria-controls="modal-notificacoes"
+                        aria-controls="notification-modal"
                         onClick={ async () => {
                             setModalAberto(true); 
                             await carregarNotificacoes();

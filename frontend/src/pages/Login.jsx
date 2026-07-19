@@ -84,11 +84,11 @@ export default function Login() {
             />
 
             {erro && (
-                <p className="mensagem-erro">{erro}</p>
+                <p className="mensagem-erro" role="alert">{erro}</p>
             )}
 
             {sucesso && (
-                <p className="mensagem-sucesso">{sucesso}</p>
+                <p className="mensagem-sucesso" aria-live="polite">{sucesso}</p>
             )}
 
             <div className="forgot-container">
