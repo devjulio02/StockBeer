@@ -9,7 +9,7 @@ export default function ResumoCard({
 }) {
     return (
 
-        <div className="metric-card">
+        <article className="metric-card">
 
             <div className="metric-card__top">
 
@@ -28,6 +28,7 @@ export default function ResumoCard({
                 <div
                     className="metric-card__icon-wrap"
                     style={{ background: cor }}
+                    aria-hidden="true"
                 >
                     {icone}
                 </div>
@@ -38,7 +39,7 @@ export default function ResumoCard({
                 {descricao}
             </div>
 
-        </div>
+        </article>
 
     );
 }

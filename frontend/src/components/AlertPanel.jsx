@@ -12,7 +12,7 @@ export default function AlertPanel({ alertas }) {
                 <div>
 
                     <h2 className="alert-panel__title">
-                        <FaExclamationTriangle className="alert-icon"/>
+                        <FaExclamationTriangle className="alert-icon" aria-hidden="true"/>
                         Alertas de Reposição
                     </h2>
 
@@ -22,7 +22,7 @@ export default function AlertPanel({ alertas }) {
 
                 </div>
 
-                <span className="alert-panel__badge">
+                <span className="alert-panel__badge" aria-label="Produtos que precisam de reposição">
 
                     ATENÇÃO
 
@@ -33,16 +33,20 @@ export default function AlertPanel({ alertas }) {
             <div className="alert-table-wrapper">
                 <table className="alert-table">
 
+                    <caption className="sr-only">
+                        Lista de produtos abaixo do estoque mínimo
+                    </caption>
+
                     <thead>
 
                         <tr>
 
-                            <th>Produto</th>
-                            <th>Categoria</th>
-                            <th>Qtd. Atual</th>
-                            <th>Estoque Mínimo</th>
-                            <th>Sugestão</th>
-                            <th>Status</th>
+                            <th scope="col">Produto</th>
+                            <th scope="col">Categoria</th>
+                            <th scope="col">Qtd. Atual</th>
+                            <th scope="col">Estoque Mínimo</th>
+                            <th scope="col">Sugestão</th>
+                            <th scope="col">Status</th>
 
                         </tr>
 
@@ -111,7 +115,7 @@ export default function AlertPanel({ alertas }) {
 
                                             <div className="status-progress">
 
-                                                <div className="status-progress__bar">
+                                                <div className="status-progress__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow={item.percentual_estoque} aria-label={`Nível de estoque de ${item.produto}`}>
 
                                                     <div
                                                         className="status-progress__fill"

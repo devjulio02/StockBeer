@@ -79,7 +79,11 @@ export default function Dashboard() {
     }, []);
 
     if (carregando) {
-        return <h2>Carregando Dashboard...</h2>
+        return (
+            <h2 role="status" aria-live="polite">
+                Carregando Dashboard...
+            </h2>
+        );
     }
 
     return (
@@ -105,15 +109,29 @@ export default function Dashboard() {
                     </div>
 
                     <button
+                        type="button"
                         className="notification-button"
-                        onClick={ async () => {setModalAberto(true); carregarNotificacoes();}}
+                        aria-label={
+                            notificacoes.length > 0
+                                ? `Abrir notificações. ${notificacoes.length} notificação${notificacoes.length > 1 ? "ões" : ""} pendente${notificacoes.length > 1 ? "s" : ""}.`
+                                : "Abrir notificações. Nenhuma notificação pendente."
+                        }
+                        aria-haspopup="dialog"
+                        aria-expanded={modalAberto}
+                        aria-controls="modal-notificacoes"
+                        onClick={ async () => {
+                            setModalAberto(true); 
+                            await carregarNotificacoes();
+                        }}
                     >
-
-                        🔔
+                        <span aria-hidden="true">
+                            🔔
+                        </span>
+                        
 
                         {notificacoes.length > 0 && (
 
-                            <span className="notification-badge">
+                            <span className="notification-badge" aria-hidden="true">
 
                                 {notificacoes.length > 99
                                     ? "99+"
