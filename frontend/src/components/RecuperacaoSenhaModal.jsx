@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Input from "./Input";
 
@@ -26,8 +26,6 @@ export default function RecuperacaoSenhaModal({
     const [sucesso, setSucesso] = useState("");
 
     const [carregando, setCarregando] = useState(false);
-
-    if (!aberto) return null;
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -148,6 +146,32 @@ export default function RecuperacaoSenhaModal({
 
     }
 
+    useEffect(() => {
+
+        if (!aberto) return;
+
+        function handleEscape(event) {
+
+            if (event.key === "Escape") {
+
+                fecharModal();
+
+            }
+
+        }
+
+        window.addEventListener("keydown", handleEscape);
+
+        return () => {
+
+            window.removeEventListener("keydown", handleEscape);
+
+        };
+
+    }, [aberto]);
+
+    if (!aberto) return null;
+
     return (
 
         <div
@@ -157,10 +181,16 @@ export default function RecuperacaoSenhaModal({
 
             <div
                 className="recuperacao-senha-modal"
+                id="recuperacao-senha-modal"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="recuperacao-senha-modal-title"
                 onClick={(e) => e.stopPropagation()}
             >
 
-                <h2>Recuperação de Senha</h2>
+                <h2 id="recuperacao-senha-modal-title">
+                    Recuperação de Senha
+                </h2>
 
                 <form onSubmit={handleSubmit}>
                     {modo === "solicitar" ? (
@@ -183,7 +213,10 @@ export default function RecuperacaoSenhaModal({
 
                         <>
 
-                            <p className="mensagem-sucesso">
+                            <p 
+                                className="mensagem-sucesso"
+                                aria-live="polite"
+                            >
                                 Solicitação criada com sucesso.
                                 Agora informe sua nova senha.
                             </p>
@@ -222,13 +255,19 @@ export default function RecuperacaoSenhaModal({
                     )}
 
                     {erro && (
-                        <p className="mensagem-erro">
+                        <p 
+                            className="mensagem-erro"
+                            role="alert"
+                        >
                             {erro}
                         </p>
                     )}
 
                     {modo === "solicitar" && sucesso && (
-                        <p className="mensagem-sucesso">
+                        <p 
+                            className="mensagem-sucesso"
+                            aria-live="polite"    
+                        >
                             {sucesso}
                         </p>
                     )}

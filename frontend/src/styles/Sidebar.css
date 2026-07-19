@@ -48,18 +48,32 @@
   gap: 10px;
 }
 
-.sidebar nav a {
-  padding: 15px 18px;
-  border-radius: 16px;
-  color: #cbd5e1;
+.sidebar nav a,
+.sidebar nav button {
   display: flex;
   align-items: center;
   gap: 12px;
+
+  width: 100%;
+  padding: 15px 18px;
+
+  border: none;
+  border-radius: 16px;
+  background: transparent;
+
+  color: #cbd5e1;
+  font: inherit;
   font-weight: 600;
+  text-decoration: none;
+  text-align: left;
+
   cursor: pointer;
+
+  box-sizing: border-box;
 }
 
-.sidebar nav a.active {
+.sidebar nav a.active,
+.sidebar nav button.active {
   background: rgba(216, 144, 0, 0.18);
   color: #d89000;
 }
@@ -141,12 +155,14 @@
 
 .sidebar.collapsed .brand-text,
 .sidebar.collapsed .admin-info,
-.sidebar.collapsed nav a span {
+.sidebar.collapsed nav a span,
+.sidebar.collapsed nav button span {
 
     display: none;
 }
 
-.sidebar.collapsed nav a {
+.sidebar.collapsed nav a,
+.sidebar.collapsed nav button {
 
     justify-content: center;
 }
@@ -159,4 +175,11 @@
 .sidebar.collapsed .admin-box {
 
     justify-content: center;
+}
+
+.sidebar nav a:hover,
+.sidebar nav button:hover {
+
+    background: rgba(255,255,255,.08);
+    color: white;
 }

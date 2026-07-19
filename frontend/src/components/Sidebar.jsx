@@ -59,19 +59,19 @@ export default function Sidebar() {
 
                 <nav id="sidebar-navigation" aria-label="Menu principal">
 
-                    <a href="/dashboard" onClick={(e) => { e.preventDefault(); navigate("/dashboard");}} className={location.pathname === "/dashboard" ? "active" : ""}>
+                    <a href="/dashboard" onClick={(e) => { e.preventDefault(); navigate("/dashboard");}} className={!modalAberto && location.pathname === "/dashboard" ? "active" : ""}>
                         <FaChartBar aria-hidden="true" />
                         <span>Dashboard</span>
                     </a>
 
-                    <a href="/estoque" onClick={(e) => { e.preventDefault(); navigate("/estoque");}} className={location.pathname === "/estoque" ? "active" : ""}>
+                    <a href="/estoque" onClick={(e) => { e.preventDefault(); navigate("/estoque");}} className={!modalAberto && location.pathname === "/estoque" ? "active" : ""}>
                         <FaBoxOpen aria-hidden="true" />
                         <span>Estoque</span>
                     </a>
 
                     <button
                         type="button"
-                        className={location.pathname === "/entradas/saidas" ? "active" : ""}
+                        className={modalAberto ? "active" : ""}
                         aria-label="Registrar entradas e saídas"
                         aria-haspopup="dialog"
                         aria-expanded={modalAberto}

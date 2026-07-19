@@ -1,5 +1,6 @@
 import { resolverNotificacao } from "../services/notificacaoService";
 import "../styles/notificacaoModal.css";
+import { useEffect } from "react"
 
 export default function NotificacaoModal({ aberto, onClose, notificacoes, atualizarNotificacoes }) {
 
@@ -32,6 +33,30 @@ export default function NotificacaoModal({ aberto, onClose, notificacoes, atuali
         return `${dia} às ${hora}`;
 
     }
+
+    useEffect(() => {
+
+        if (!aberto) return;
+
+        function handleEscape(event) {
+
+            if (event.key === "Escape") {
+
+                onClose();
+
+            }
+
+        }
+
+        window.addEventListener("keydown", handleEscape);
+
+        return () => {
+
+            window.removeEventListener("keydown", handleEscape);
+
+        };
+
+    }, [aberto, onClose]);
     
     if (!aberto) {
 
@@ -43,17 +68,30 @@ export default function NotificacaoModal({ aberto, onClose, notificacoes, atuali
 
         <div className="modal-overlay">
 
-            <div className="modal">
+            <div 
+                className="modal" 
+                id="notification-modal"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="notification-modal-title" 
+            >
 
                 <div className="modal-header">
 
-                    <h2>Notificações</h2>
+                    <h2 id="notification-modal-title">
+                        Notificações
+                    </h2>
 
                     <button
+                        type="button"
                         className="modal-close"
+                        aria-label="Fechar janela"
                         onClick={onClose}
                     >
-                        ✖
+                        <span aria-hidden="true">
+                            ✖
+                        </span>
+                        
                     </button>
 
                 </div>
@@ -86,7 +124,7 @@ export default function NotificacaoModal({ aberto, onClose, notificacoes, atuali
 
                                     </small>
 
-                                    <button className="resolver-button" onClick={() => resolver(notificacao.id)}>
+                                    <button type="button" className="resolver-button" onClick={() => resolver(notificacao.id)}>
 
                                         Marcar como resolvida
 

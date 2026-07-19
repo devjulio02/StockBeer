@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cadastrarUsuario } from "../services/cadastroService";
 import "../styles/CadastroUsuarioModal.css";
 import Input from "./Input";
@@ -16,8 +16,6 @@ export default function CadastroUsuarioModal({
     });
 
     const [carregando, setCarregando] = useState(false);
-
-    if (!aberto) return null;
 
     function handleChange(e) {
         setForm({
@@ -96,6 +94,32 @@ export default function CadastroUsuarioModal({
         }
     }
 
+    useEffect(() => {
+
+        if (!aberto) return;
+
+        function handleEscape(event) {
+
+            if (event.key === "Escape") {
+
+                fecharModal();
+
+            }
+
+        }
+
+        window.addEventListener("keydown", handleEscape);
+
+        return () => {
+
+            window.removeEventListener("keydown", handleEscape);
+
+        };
+
+    }, [aberto]);
+
+    if (!aberto) return null;
+
     return (
 
         <div
@@ -105,10 +129,16 @@ export default function CadastroUsuarioModal({
 
             <div
                 className="cadastro-usuario-modal"
+                id="cadastro-usuario-modal"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="cadastro-usuario-modal-title"
                 onClick={(e) => e.stopPropagation()}
             >
 
-                <h2>Cadastrar Usuário</h2>
+                <h2 id="cadastro-usuario-modal-title">
+                    Cadastrar Usuário
+                </h2>
 
                 <form onSubmit={handleSubmit}>
 

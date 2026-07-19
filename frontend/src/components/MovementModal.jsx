@@ -112,13 +112,44 @@ export default function MovementModal({ aberto, onClose }) {
 
     }, [aberto]);
 
+    useEffect(() => {
+
+        if (!aberto) return;
+
+        function handleEscape(event) {
+
+            if (event.key === "Escape") {
+
+                fecharModal();
+
+            }
+
+        }
+
+        window.addEventListener("keydown", handleEscape);
+
+        return () => {
+
+            window.removeEventListener("keydown", handleEscape);
+
+        };
+
+    }, [aberto]);
+
     if (!aberto) return null;
 
     return (
 
         <div className="modal-backdrop">
 
-            <div className="modal-card">
+            <div 
+                className="modal-card"
+                id="movement-modal"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="movement-modal-title"
+                aria-describedby="movement-modal-description"
+            >
 
                 <header className="modal-header">
 
@@ -138,13 +169,13 @@ export default function MovementModal({ aberto, onClose }) {
 
                         <div>
 
-                            <h2 className="modal-header__title">
+                            <h2 id="movement-modal-title" className="modal-header__title">
 
                                 Nova Movimentação
 
                             </h2>
 
-                            <p className="modal-header__sub">
+                            <p id="movement-modal-description"  className="modal-header__sub">
 
                                 Registrar entrada ou saída de produto
 
@@ -155,11 +186,13 @@ export default function MovementModal({ aberto, onClose }) {
                     </div>
 
                     <button
+                        type="button"
                         className="modal-close-btn"
+                        aria-label="Fechar janela"
                         onClick={fecharModal}
                     >
 
-                        <FaTimes />
+                        <FaTimes aria-hidden="true" />
 
                     </button>
 
@@ -213,7 +246,7 @@ export default function MovementModal({ aberto, onClose }) {
                                 type="button"
                             >
 
-                                <FaArrowUp />
+                                <FaArrowUp aria-hidden="true" />
 
                                 <div>
 
@@ -243,7 +276,7 @@ export default function MovementModal({ aberto, onClose }) {
                                 type="button"
                             >
 
-                                <FaArrowDown />
+                                <FaArrowDown aria-hidden="true" />
 
                                 <div>
 
@@ -297,6 +330,7 @@ export default function MovementModal({ aberto, onClose }) {
                 <footer className="modal-footer">
 
                     <button
+                        type="button"
                         className="btn-secondary"
                         onClick={fecharModal}
                     >

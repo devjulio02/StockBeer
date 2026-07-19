@@ -30,6 +30,30 @@ export default function EditarBebidaModal({
         }
     }, [bebida]);
 
+    useEffect(() => {
+
+        if (!aberto) return;
+
+        function handleEscape(event) {
+
+            if (event.key === "Escape") {
+
+                onClose();
+
+            }
+
+        }
+
+        window.addEventListener("keydown", handleEscape);
+
+        return () => {
+
+            window.removeEventListener("keydown", handleEscape);
+
+        };
+
+    }, [aberto, onClose]);
+
     function handleChange(e) {
         setForm({
             ...form,
@@ -53,9 +77,18 @@ export default function EditarBebidaModal({
     return (
         <div className="modal-overlay" onClick={onClose}>
 
-            <div className="editar-bebida-modal" onClick={(e) => e.stopPropagation()}>
+            <div 
+                className="editar-bebida-modal"
+                id="editar-bebida-modal"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="editar-bebida-modal-title" 
+                onClick={(e) => e.stopPropagation()}
+            >
 
-                <h2>Editar Bebida</h2>
+                <h2 id="editar-bebida-modal-title">
+                    Editar Bebida
+                </h2>
 
                 <form onSubmit={handleSubmit}>
 
