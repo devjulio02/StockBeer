@@ -1,36 +1,53 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import "../styles/Input.css";
 import { FaEye, FaEyeSlash, FaEnvelope, FaLock, FaUser } from "react-icons/fa";
  
 export default function Input({
+  id,
   label,
   name,
   type = "text",
   placeholder,
   value,
-  onChange
+  onChange,
+  required = false,
+  autoComplete,
+  ...props
 }) {
     const [showPassword, setShowPassword] = useState(false);
 
     const isPassword = type === "password";
 
+    const generatedId = useId();
+
+    const inputId = id || generatedId;
+
     const getIcon = () => {
-        if (type === "text") return <FaUser />;
-        if (type === "email") return <FaEnvelope />;
-        if (type === "password") return <FaLock />;
+        if (type === "text") return <FaUser aria-hidden="true" />;
+        if (type === "email") return <FaEnvelope aria-hidden="true" />;
+        if (type === "password") return <FaLock aria-hidden="true" />;
         return null;
     };
 
   return (
     <div className="input-group">
-        <label>{label}</label>
+        <label htmlFor={inputId}>
+            {label}
+            {required && (
+                <span aria-hidden="true">
+                    {" *"}
+                </span>
+            )}
+        </label>
 
         <div className="input-wrapper">
-            <span className="input-icon">
+            <span className="input-icon" aria-hidden="true">
                 {getIcon()}
             </span>
 
             <input
+                id={inputId}
+                name={name}                
                 type={
                     isPassword
                     ? (showPassword ? "text" : "password")
@@ -39,6 +56,9 @@ export default function Input({
                 placeholder={placeholder}
                 value={value}
                 onChange={onChange}
+                required={required}
+                autoComplete={autoComplete}
+                {...props}
             />
 
             {isPassword && (
@@ -46,8 +66,13 @@ export default function Input({
                     type="button"
                     className="eye-button"
                     onClick={() => setShowPassword(!showPassword)}
+                    aria-label={
+                        showPassword
+                            ? "Ocultar senha"
+                            : "Mostrar senha"
+                    }
                 >
-                    {showPassword ? <FaEyeSlash /> : <FaEye/>}
+                    {showPassword ? <FaEyeSlash aria-hidden="true" /> : <FaEye aria-hidden="true" />}
                 </button>
             )}
 
