@@ -30,6 +30,30 @@ export default function EditarBebidaModal({
         }
     }, [bebida]);
 
+    useEffect(() => {
+
+        if (!aberto) return;
+
+        function handleEscape(event) {
+
+            if (event.key === "Escape") {
+
+                onClose();
+
+            }
+
+        }
+
+        window.addEventListener("keydown", handleEscape);
+
+        return () => {
+
+            window.removeEventListener("keydown", handleEscape);
+
+        };
+
+    }, [aberto, onClose]);
+
     function handleChange(e) {
         setForm({
             ...form,
@@ -53,19 +77,29 @@ export default function EditarBebidaModal({
     return (
         <div className="modal-overlay" onClick={onClose}>
 
-            <div className="editar-bebida-modal" onClick={(e) => e.stopPropagation()}>
+            <div 
+                className="editar-bebida-modal"
+                id="editar-bebida-modal"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="editar-bebida-modal-title" 
+                onClick={(e) => e.stopPropagation()}
+            >
 
-                <h2>Editar Bebida</h2>
+                <h2 id="editar-bebida-modal-title">
+                    Editar Bebida
+                </h2>
 
                 <form onSubmit={handleSubmit}>
 
-                     <label className="form-label">
+                     <label className="form-label" htmlFor="nome">
 
                         Nome da Bebida
 
                     </label>
 
                     <input
+                        id="nome"
                         name="nome"
                         value={form.nome}
                         onChange={handleChange}
@@ -73,13 +107,14 @@ export default function EditarBebidaModal({
                         required
                     />
 
-                     <label className="form-label">
+                     <label className="form-label" htmlFor="marca">
 
                         Marca
 
                     </label>
 
                     <input
+                        id="marca"
                         name="marca"
                         value={form.marca}
                         onChange={handleChange}
@@ -87,13 +122,14 @@ export default function EditarBebidaModal({
                         required
                     />
 
-                     <label className="form-label">
+                     <label className="form-label" htmlFor="categoria">
 
                         Categoria
 
                     </label>
 
                     <select
+                        id="categoria"
                         name="categoria"
                         value={form.categoria}
                         onChange={handleChange}
@@ -107,13 +143,14 @@ export default function EditarBebidaModal({
                         <option value="Água">Água</option>
                     </select>
 
-                     <label className="form-label">
+                     <label className="form-label" htmlFor="preco">
 
                         Preço
 
                     </label>
 
                     <input
+                        id="preco"
                         type="number"
                         min="0"
                         step="0.01"
@@ -123,13 +160,14 @@ export default function EditarBebidaModal({
                         required
                     />
 
-                     <label className="form-label">
+                     <label className="form-label" htmlFor="quantidade">
 
                         Quantidade em estoque
 
                     </label>
 
                     <input
+                        id="quantidade"
                         type="number"
                         min="0"
                         name="quantidade_estoque"
@@ -138,13 +176,14 @@ export default function EditarBebidaModal({
                         required
                     />
 
-                     <label className="form-label">
+                     <label className="form-label" htmlFor="estoque">
 
                         Estoque mínimo
 
                     </label>
 
                     <input
+                        id="estoque"
                         type="number"
                         min="0"
                         name="estoque_minimo"

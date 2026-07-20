@@ -7,7 +7,8 @@ load_dotenv()
 
 
 def get_connection():
-    return psycopg2.connect(
+     
+    conn = psycopg2.connect(
         host=os.getenv("DB_HOST"),
         port=os.getenv("DB_PORT"),
         database=os.getenv("DB_NAME"),
@@ -16,6 +17,10 @@ def get_connection():
         cursor_factory=RealDictCursor
     )
 
+    with conn.cursor() as cursor:
+        cursor.execute("SET TIME ZONE 'America/Sao_Paulo';")
+
+    return conn
 
 def test_connection():
     conn = get_connection()

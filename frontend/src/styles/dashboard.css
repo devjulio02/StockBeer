@@ -53,6 +53,8 @@
 ========================================================== */
 
 .notification-button {
+
+    position: relative;
     width: 40px;
     height: 40px;
 
@@ -70,6 +72,38 @@
     font-size: 18px;
 
     transition: background .2s;
+}
+
+.notification-badge {
+
+    position: absolute;
+
+    top: -6px;
+
+    right: -6px;
+
+    min-width: 20px;
+
+    height: 20px;
+
+    border-radius: 50%;
+
+    background: #dc2626;
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 2px;
+
 }
 
 .notification-button:hover {

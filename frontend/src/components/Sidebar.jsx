@@ -1,7 +1,7 @@
 import { FaBars, FaBoxOpen, FaChartBar, FaExchangeAlt } from "react-icons/fa";
 import canecaBeer2 from "../assets/canecaBeer2.png";
 import "../styles/Sidebar.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import MovementModal from "./MovementModal";
 
@@ -9,8 +9,17 @@ export default function Sidebar() {
 
     const [collapsed, setCollapsed] = useState(false);
     const [modalAberto, setModalAberto] = useState(false);
+    const [usuario, setUsuario] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
+
+    useEffect(() => {
+        const usuarioSalvo = localStorage.getItem("usuario");
+
+        if (usuarioSalvo) {
+            setUsuario(JSON.parse(usuarioSalvo));
+        }
+    }, []);
 
     return (
         <>
@@ -18,16 +27,23 @@ export default function Sidebar() {
                 <button
                     className="sidebar-toggle"
                     type="button"
+                    aria-label={
+                        collapsed
+                            ? "Expandir menu lateral"
+                            : "Recolher menu lateral"
+                    }
+                    aria-expanded={!collapsed}
+                    aria-controls="sidebar-navigation"
                     onClick={() => setCollapsed(!collapsed)}
                 >
-                    <FaBars />
+                    <FaBars aria-hidden="true" />
                 </button>
 
                 <div className="brand">
 
                     <img
                         src={canecaBeer2}
-                        alt="StockBeer"
+                        alt="Logotipo do StockBeer"
                         className="logo-sidebar"
                     />
 
@@ -41,34 +57,42 @@ export default function Sidebar() {
 
                 </div>
 
-                <nav>
+                <nav id="sidebar-navigation" aria-label="Menu principal">
 
-                    <a onClick={() => navigate("/dashboard")} className={location.pathname === "/dashboard" ? "active" : ""}>
-                        <FaChartBar />
+                    <a href="/dashboard" onClick={(e) => { e.preventDefault(); navigate("/dashboard");}} className={!modalAberto && location.pathname === "/dashboard" ? "active" : ""}>
+                        <FaChartBar aria-hidden="true" />
                         <span>Dashboard</span>
                     </a>
 
-                    <a onClick={() => navigate("/estoque")} className={location.pathname === "/estoque" ? "active" : ""}>
-                        <FaBoxOpen />
+                    <a href="/estoque" onClick={(e) => { e.preventDefault(); navigate("/estoque");}} className={!modalAberto && location.pathname === "/estoque" ? "active" : ""}>
+                        <FaBoxOpen aria-hidden="true" />
                         <span>Estoque</span>
                     </a>
 
-                    <a onClick={() => setModalAberto(true)} className={location.pathname === "/entradas/saidas" ? "active" : ""}>
-                        <FaExchangeAlt />
+                    <button
+                        type="button"
+                        className={modalAberto ? "active" : ""}
+                        aria-label="Registrar entradas e saídas"
+                        aria-haspopup="dialog"
+                        aria-expanded={modalAberto}
+                        aria-controls="movement-modal"
+                        onClick={() => setModalAberto(true)}
+                    >
+                        <FaExchangeAlt aria-hidden="true" />
                         <span>Entradas/Saídas</span>
-                    </a>
+                    </button>
 
                 </nav>
 
                 <div className="admin-box">
 
-                    <div className="avatar">
-                        A
+                    <div className="avatar" aria-hidden="true">
+                        {usuario?.nome?.charAt(0).toUpperCase() || "A"}
                     </div>
 
-                    <div className="admin-info">
-                        <strong>Admin</strong>
-                        <p>admin@stockbeer.com</p>
+                    <div className="admin-info" aria-label="Usuário autenticado">
+                        <strong>{usuario?.nome}</strong>
+                        <p>{usuario?.email}</p>
                     </div>
 
                 </div>

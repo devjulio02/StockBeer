@@ -5,7 +5,7 @@ export default function Logo() {
     <div className="logo-container">
 
         <div className="logo-icon">
-            <img src={canecaBeer} alt="StockBeer" className="logo-image"/>
+            <img src={canecaBeer} alt="Logotipo do StockBeer" className="logo-image"/>
         </div>
 
         <h1>

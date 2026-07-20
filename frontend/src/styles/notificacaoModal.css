@@ -1,0 +1,79 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-y: auto;
+    padding: 24px;
+}
+
+.modal {
+    width: 500px;
+    max-width: 90%;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-close {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-size: 18px;
+}
+
+.modal-body {
+    margin-top: 20px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.notificacoes-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.notificacao-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 16px;
+    background: #fafafa;
+}
+
+.notificacao-mensagem {
+    font-size: 15px;
+    margin-bottom: 8px;
+    color: #222;
+}
+
+.notificacao-data {
+    display: block;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.resolver-button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    background: #d97706;
+    color: white;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.resolver-button:hover {
+    background: #b45309;
+}

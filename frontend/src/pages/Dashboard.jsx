@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { buscarPainel } from "../services/painelService";
 import ResumoCard from "../components/ResumoCard";
 import AlertPanel from "../components/AlertPanel";
+import NotificacaoModal from "../components/NotificacaoModal";
+import { listarNotificacoes } from "../services/notificacaoService";
 import {
     FaBoxes,
     FaExchangeAlt,
@@ -15,6 +17,9 @@ export default function Dashboard() {
 
     const [painel, setPainel] = useState(null);
     const [carregando, setCarregando] = useState(true);
+    const [notificacoes, setNotificacoes] = useState([]);
+
+    const [modalAberto, setModalAberto] = useState(false);
 
     const dataAtual = new Date().toLocaleDateString("pt-BR", {
         weekday: "long",
@@ -27,6 +32,22 @@ export default function Dashboard() {
         dataAtual.charAt(0).toUpperCase() +
         dataAtual.slice(1);
 
+    async function carregarNotificacoes() {
+
+        try {
+
+            const dados = await listarNotificacoes();
+
+            setNotificacoes(dados.notificacoes);
+
+        } catch (error) {
+
+            console.error(error);
+
+        }
+
+    }
+
     useEffect(() => {
 
         async function carregarPainel() {
@@ -35,9 +56,9 @@ export default function Dashboard() {
 
                 const dados = await buscarPainel();
 
-                console.log(dados);
-
                 setPainel(dados);
+
+                await carregarNotificacoes();
 
             } catch (error) {
 
@@ -58,7 +79,11 @@ export default function Dashboard() {
     }, []);
 
     if (carregando) {
-        return <h2>Carregando Dashboard...</h2>
+        return (
+            <h2 role="status" aria-live="polite">
+                Carregando Dashboard...
+            </h2>
+        );
     }
 
     return (
@@ -83,9 +108,38 @@ export default function Dashboard() {
 
                     </div>
 
-                    <button className="notification-button">
+                    <button
+                        type="button"
+                        className="notification-button"
+                        aria-label={
+                            notificacoes.length > 0
+                                ? `Abrir notificações. ${notificacoes.length} notificação${notificacoes.length > 1 ? "ões" : ""} pendente${notificacoes.length > 1 ? "s" : ""}.`
+                                : "Abrir notificações. Nenhuma notificação pendente."
+                        }
+                        aria-haspopup="dialog"
+                        aria-expanded={modalAberto}
+                        aria-controls="notification-modal"
+                        onClick={ async () => {
+                            setModalAberto(true); 
+                            await carregarNotificacoes();
+                        }}
+                    >
+                        <span aria-hidden="true">
+                            🔔
+                        </span>
+                        
 
-                        🔔
+                        {notificacoes.length > 0 && (
+
+                            <span className="notification-badge" aria-hidden="true">
+
+                                {notificacoes.length > 99
+                                    ? "99+"
+                                    : notificacoes.length}
+
+                            </span>
+
+                        )}
 
                     </button>
 
@@ -130,6 +184,13 @@ export default function Dashboard() {
                     <AlertPanel alertas={painel.alertas_reposicao}/>
                         
                 </section>
+
+                <NotificacaoModal 
+                    aberto={modalAberto} 
+                    onClose={() => setModalAberto(false)} 
+                    notificacoes={notificacoes} 
+                    atualizarNotificacoes={carregarNotificacoes}
+                />
 
             </main>
 
