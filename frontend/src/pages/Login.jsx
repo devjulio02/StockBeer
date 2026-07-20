@@ -51,7 +51,7 @@ export default function Login() {
             
             setSucesso(response.data.message);
             setTimeout(() => {
-                navigate("/estoque");
+                navigate("/dashboard");
             }, 1000);
         }catch(error){
             setErro(error.response?.data?.message || "Erro ao realizar login.");
