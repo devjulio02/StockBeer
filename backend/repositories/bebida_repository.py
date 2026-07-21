@@ -104,10 +104,9 @@ class BebidaRepository:
                     condicoes.append("c.nome ILIKE %s")
                     parametros.append(categoria)
 
-                where_sql = ""
+                condicoes.insert(0, "b.ativo = TRUE")
 
-                if condicoes:
-                    where_sql = "WHERE " + " AND ".join(condicoes)
+                where_sql = "WHERE " + " AND ".join(condicoes)
 
                 ordenacoes_permitidas = {
                     "id": "b.id",
@@ -239,8 +238,10 @@ class BebidaRepository:
                 with conn.cursor() as cursor:
                     cursor.execute(
                         """
-                        DELETE FROM bebidas
+                        UPDATE bebidas
+                        SET ativo = FALSE
                         WHERE id = %s
+                        AND ativo = TRUE
                         RETURNING id;
                         """,
                         (bebida_id,)
