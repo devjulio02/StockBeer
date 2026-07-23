@@ -1,4 +1,4 @@
-import { FaBars, FaBoxOpen, FaChartBar, FaExchangeAlt } from "react-icons/fa";
+import { FaBars, FaBoxOpen, FaChartBar, FaExchangeAlt, FaSignOutAlt } from "react-icons/fa";
 import canecaBeer2 from "../assets/canecaBeer2.png";
 import "../styles/Sidebar.css";
 import { useState, useEffect } from "react";
@@ -20,6 +20,16 @@ export default function Sidebar() {
             setUsuario(JSON.parse(usuarioSalvo));
         }
     }, []);
+
+    function handleLogout() {
+
+        localStorage.removeItem("usuario");
+
+        setUsuario(null);
+
+        navigate("/");
+
+    }
 
     return (
         <>
@@ -83,17 +93,31 @@ export default function Sidebar() {
                     </button>
 
                 </nav>
+                
+                <div className="admin-container">
 
-                <div className="admin-box">
+                    <div className="admin-box">
 
-                    <div className="avatar" aria-hidden="true">
-                        {usuario?.nome?.charAt(0).toUpperCase() || "A"}
+                        <div className="avatar" aria-hidden="true">
+                            {usuario?.nome?.charAt(0).toUpperCase() || "A"}
+                        </div>
+
+                        <div className="admin-info" aria-label="Usuário autenticado">
+                            <strong>{usuario?.nome}</strong>
+                            <p>{usuario?.email}</p>
+                        </div>
+
                     </div>
 
-                    <div className="admin-info" aria-label="Usuário autenticado">
-                        <strong>{usuario?.nome}</strong>
-                        <p>{usuario?.email}</p>
-                    </div>
+                    <button
+                        type="button"
+                        className="logout-button"
+                        onClick={handleLogout}
+                        aria-label="Sair do sistema"
+                    >
+                        <FaSignOutAlt aria-hidden="true" />
+                        <span>Logout</span>
+                    </button>
 
                 </div>
 

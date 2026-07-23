@@ -79,17 +79,99 @@
 }
 
 .admin-box {
-  margin-top: auto;
   display: flex;
   align-items: center;
   gap: 12px;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  padding-top: 20px;
+}
+
+.admin-info {
+
+    flex: 1;
+
+    min-width: 0;
+
+}
+
+.admin-info strong {
+
+    display: block;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+}
+
+.admin-info p {
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+}
+
+.admin-container {
+
+    margin-top: auto;
+
+    border-top: 1px solid rgba(255,255,255,.08);
+
+    padding-top: 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+}
+
+.logout-button {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    width: 100%;
+
+    margin-top: 16px;
+
+    padding: 15px 18px;
+
+    border: none;
+    border-radius: 16px;
+
+    background: rgba(220, 38, 38, .15);
+
+    color: #ef4444;
+
+    font: inherit;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+    box-sizing: border-box;
+
+}
+
+.logout-button:hover {
+
+    background: rgba(220,38,38,.28);
+    color: #ffffff;
+
 }
 
 .avatar {
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
   background: #d89000;
   border-radius: 50%;
   display: flex;
@@ -156,7 +238,8 @@
 .sidebar.collapsed .brand-text,
 .sidebar.collapsed .admin-info,
 .sidebar.collapsed nav a span,
-.sidebar.collapsed nav button span {
+.sidebar.collapsed nav button span,
+.sidebar.collapsed .logout-button span {
 
     display: none;
 }
@@ -172,9 +255,11 @@
     justify-content: center;
 }
 
-.sidebar.collapsed .admin-box {
+.sidebar.collapsed .admin-box,
+.sidebar.collapsed .logout-button {
 
     justify-content: center;
+    padding: 15px;
 }
 
 .sidebar nav a:hover,
