@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaSave, FaArrowLeft, FaPlus } from "react-icons/fa";
 import { cadastrarBebida } from "../services/bebidaService";
@@ -17,6 +17,12 @@ export default function CadastroBebidas() {
     quantidade_estoque: "",
     estoque_minimo: "10",
   });
+
+  const tituloRef = useRef(null);
+
+  useEffect(() => {
+      tituloRef.current?.focus();
+  }, []);
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -50,16 +56,16 @@ export default function CadastroBebidas() {
       <main className="content cadastro-content">
         <header className="page-header cadastro-header">
           <div>
-            <h1>Cadastrar Bebida</h1>
+            <h1 ref={tituloRef} tabIndex={-1} aria-label="Tela de cadastro de bebidas">Cadastrar Bebida</h1>
             <p>Adicione uma nova bebida ao catálogo do StockBeer</p>
           </div>
 
-          <button className="back-button" onClick={() => navigate("/estoque")}>
+          <button aria-label="Voltar para tela de estoque" className="back-button" onClick={() => navigate("/estoque")}>
             <FaArrowLeft /> Estoque
           </button>
         </header>
 
-        <section className="cadastro-wrapper">
+        <section aria-label="Formulário para cadastrar novas bebidas, a seguir insira as informações aos campos pertinentes sobrea a nova bebida:" className="cadastro-wrapper">
           <form className="form-card" onSubmit={handleSubmit}>
             <div className="form-title">
               <img src={canecaBeer2} alt="StockBeer" className="form-logo" />
@@ -70,7 +76,7 @@ export default function CadastroBebidas() {
               </div>
             </div>
 
-            <div className="form-grid">
+            <div aria-label="Campo nome da bebida" className="form-grid">
               <div className="form-group full">
                 <label htmlFor="nome-bebida">Nome da bebida</label>
                 <input
@@ -78,24 +84,24 @@ export default function CadastroBebidas() {
                   name="nome"
                   value={form.nome}
                   onChange={handleChange}
-                  placeholder="Ex: Skol Lata 350ml"
+                  placeholder="Exemplo: Skol Lata 350ml"
                   required
                 />
               </div>
 
-              <div className="form-group">
+              <div aria-label="Campo marca da bebida" className="form-group">
                 <label htmlFor="marca">Marca</label>
                 <input
                   id="marca"
                   name="marca"
                   value={form.marca}
                   onChange={handleChange}
-                  placeholder="Ex: Skol"
+                  placeholder="Exemplo: Skol"
                   required
                 />
               </div>
 
-              <div className="form-group">
+              <div aria-label="Campo categoria da bebida" className="form-group">
                 <label htmlFor="categoria">Categoria</label>
                 <select
                   id="categoria"
@@ -113,7 +119,7 @@ export default function CadastroBebidas() {
                 </select>
               </div>
 
-              <div className="form-group">
+              <div aria-label="Campo preço da bebida" className="form-group">
                 <label htmlFor="preco">Preço</label>
                 <input
                   id="preco"
@@ -123,12 +129,12 @@ export default function CadastroBebidas() {
                   min="0"
                   value={form.preco}
                   onChange={handleChange}
-                  placeholder="Ex: 5.50"
+                  placeholder="Exemplo: 5.50"
                   required
                 />
               </div>
 
-              <div className="form-group">
+              <div aria-label="Campo quantidade da bebida em estoque" className="form-group">
                 <label htmlFor="quantidade-estoque">Quantidade em estoque</label>
                 <input
                   id="quantidade-estoque"
@@ -137,12 +143,12 @@ export default function CadastroBebidas() {
                   min="0"
                   value={form.quantidade_estoque}
                   onChange={handleChange}
-                  placeholder="Ex: 20"
+                  placeholder="Exemplo: 20"
                   required
                 />
               </div>
 
-              <div className="form-group">
+              <div aria-label="Campo estoque mínimo da bebida" className="form-group">
                 <label htmlFor="estoque-minimo">Estoque mínimo</label>
                 <input
                   id="estoque-minimo"
@@ -151,7 +157,7 @@ export default function CadastroBebidas() {
                   min="0"
                   value={form.estoque_minimo}
                   onChange={handleChange}
-                  placeholder="Ex: 10"
+                  placeholder="Exemplo: 10"
                   required
                 />
               </div>

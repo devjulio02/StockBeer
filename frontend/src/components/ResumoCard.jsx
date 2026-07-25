@@ -7,9 +7,33 @@ export default function ResumoCard({
     icone,
     cor
 }) {
+
+    function descricaoResumo() {
+
+        switch (titulo) {
+
+            case "Total de Itens":
+                return `Resumo do estoque. Existem atualmente ${valor} produtos cadastrados.`;
+
+            case "Movimentações":
+                return `Resumo de movimentações. Foram registradas ${valor} movimentações ${descricao}.`;
+
+            case "Entradas":
+                return `Resumo de entradas. Foram recebidas ${valor} ${descricao}.`;
+
+            case "Saídas":
+                return `Resumo de saídas. Foram expedidas ${valor} ${descricao}.`;
+
+            default:
+                return `${titulo}. ${valor}. ${descricao}.`;
+
+        }
+
+    }
+
     return (
 
-        <article className="metric-card">
+        <article className="metric-card" tabIndex={0} aria-label={descricaoResumo()}>
 
             <div className="metric-card__top">
 

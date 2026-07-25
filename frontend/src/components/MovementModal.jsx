@@ -1,5 +1,8 @@
 import "../styles/movementModal.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import useFocusTrap from "../hooks/useFocusTrap";
+import useLiveAnnouncement from "../hooks/useLiveAnnouncement";
+import LiveAnnouncement from "./LiveAnnouncement";
 
 import { 
     listarProdutos, 
@@ -40,6 +43,19 @@ export default function MovementModal({ aberto, onClose }) {
         onClose();
 
     };
+
+    const modalRef = useFocusTrap(
+        aberto,
+        fecharModal
+    );
+
+    const {
+
+        mensagem,
+
+        anunciar
+
+    } = useLiveAnnouncement();
 
     const handleSubmit = async () => {
 
@@ -112,30 +128,6 @@ export default function MovementModal({ aberto, onClose }) {
 
     }, [aberto]);
 
-    useEffect(() => {
-
-        if (!aberto) return;
-
-        function handleEscape(event) {
-
-            if (event.key === "Escape") {
-
-                fecharModal();
-
-            }
-
-        }
-
-        window.addEventListener("keydown", handleEscape);
-
-        return () => {
-
-            window.removeEventListener("keydown", handleEscape);
-
-        };
-
-    }, [aberto]);
-
     if (!aberto) return null;
 
     return (
@@ -143,12 +135,14 @@ export default function MovementModal({ aberto, onClose }) {
         <div className="modal-backdrop">
 
             <div 
+                ref={modalRef}
                 className="modal-card"
                 id="movement-modal"
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="movement-modal-title"
                 aria-describedby="movement-modal-description"
+                tabIndex={-1}
             >
 
                 <header className="modal-header">
@@ -169,7 +163,7 @@ export default function MovementModal({ aberto, onClose }) {
 
                         <div>
 
-                            <h2 id="movement-modal-title" className="modal-header__title">
+                            <h2 aria-label="Modal para registro de movimentações das bebidas em estoque" id="movement-modal-title" className="modal-header__title">
 
                                 Nova Movimentação
 
@@ -198,7 +192,7 @@ export default function MovementModal({ aberto, onClose }) {
 
                 </header>
 
-                <div className="modal-body">
+                <div aria-label="Caixa para seleção de bebidas em estoque" className="modal-body">
 
                     <div className="form-field">
 
@@ -208,7 +202,34 @@ export default function MovementModal({ aberto, onClose }) {
 
                         </label>
 
-                        <select id="produto" className="dropdown-trigger" value={produtoSelecionado} onChange={(e) => setProdutoSelecionado(e.target.value)}>
+                        <select id="produto" className="dropdown-trigger" value={produtoSelecionado} 
+                            onChange={(e) => {
+
+                                const id = e.target.value;
+
+                                setProdutoSelecionado(id);
+
+                                const produto = produtos.find(
+
+                                    produto => produto.id === Number(id)
+
+                                );
+                            }}
+                            onBlur={() => {
+
+                                const produto = produtos.find(
+                                    p => p.id === Number(produtoSelecionado)
+                                );
+
+                                if (produto) {
+
+                                    anunciar(
+                                        `Produto ${produto.nome} selecionado.`
+                                    );
+
+                                }
+
+                            }}>
 
                             <option value="">
 
@@ -226,7 +247,7 @@ export default function MovementModal({ aberto, onClose }) {
 
                     </div>
 
-                    <div className="form-field">
+                    <div aria-label="Área para escolha do tipo de movimentação" className="form-field">
 
                         <label className="form-label">
 
@@ -242,7 +263,17 @@ export default function MovementModal({ aberto, onClose }) {
                                         ? "type-btn--entrada-active"
                                         : ""
                                 }`}
-                                onClick={() => setTipo("entrada")}
+                                onClick={() => {
+
+                                    setTipo("entrada");
+
+                                    anunciar(
+
+                                        "Tipo de movimentação escolhido: Entrada."
+
+                                    );
+
+                                }}
                                 type="button"
                             >
 
@@ -272,7 +303,17 @@ export default function MovementModal({ aberto, onClose }) {
                                         ? "type-btn--saida-active"
                                         : ""
                                 }`}
-                                onClick={() => setTipo("saida")}
+                                onClick={() => {
+
+                                    setTipo("saida");
+
+                                    anunciar(
+
+                                        "Tipo de movimentação escolhido: Saída."
+
+                                    );
+
+                                }}
                                 type="button"
                             >
 
@@ -300,7 +341,7 @@ export default function MovementModal({ aberto, onClose }) {
 
                     </div>
 
-                    <div className="form-field">
+                    <div aria-label="Campo de escolha da quantidade a ser movimentada" className="form-field">
 
                         <label className="form-label" htmlFor="quantidade">
 
@@ -316,6 +357,17 @@ export default function MovementModal({ aberto, onClose }) {
                             placeholder="0"
                             value={quantidade}
                             onChange={(e) => setQuantidade(e.target.value)}
+                            onKeyDown={(e) => {
+
+                                if (e.key === "Enter" && quantidade) {
+
+                                    anunciar(
+                                        `Quantidade informada: ${quantidade} unidades.`
+                                    );
+
+                                }
+
+                            }}
                         />
 
                         <small className="form-hint">
@@ -354,6 +406,11 @@ export default function MovementModal({ aberto, onClose }) {
 
             </div>
 
+            <LiveAnnouncement
+
+                mensagem={mensagem}
+
+            />
         </div>
 
     );

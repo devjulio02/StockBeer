@@ -1,8 +1,14 @@
 import { resolverNotificacao } from "../services/notificacaoService";
 import "../styles/notificacaoModal.css";
 import { useEffect } from "react"
+import useFocusTrap from "../hooks/useFocusTrap";
 
 export default function NotificacaoModal({ aberto, onClose, notificacoes, atualizarNotificacoes }) {
+
+    const modalRef = useFocusTrap(
+        aberto,
+        onClose
+    );
 
     async function resolver(id) {
 
@@ -33,30 +39,6 @@ export default function NotificacaoModal({ aberto, onClose, notificacoes, atuali
         return `${dia} às ${hora}`;
 
     }
-
-    useEffect(() => {
-
-        if (!aberto) return;
-
-        function handleEscape(event) {
-
-            if (event.key === "Escape") {
-
-                onClose();
-
-            }
-
-        }
-
-        window.addEventListener("keydown", handleEscape);
-
-        return () => {
-
-            window.removeEventListener("keydown", handleEscape);
-
-        };
-
-    }, [aberto, onClose]);
     
     if (!aberto) {
 
@@ -69,18 +51,28 @@ export default function NotificacaoModal({ aberto, onClose, notificacoes, atuali
         <div className="modal-overlay">
 
             <div 
+                ref={modalRef}
                 className="modal" 
                 id="notification-modal"
                 role="dialog"
                 aria-modal="true"
-                aria-labelledby="notification-modal-title" 
+                aria-labelledby="notification-modal-title"
+                aria-describedby="notification-modal-description"
+                tabIndex={-1} 
             >
 
-                <div className="modal-header">
+                <div className="modal-header" >
 
-                    <h2 id="notification-modal-title">
+                    <h2 id="notification-modal-title" >
                         Notificações
                     </h2>
+
+                    <p
+                        id="notification-modal-description"
+                        className="sr-only"
+                    >
+                        Lista de notificações pendentes do sistema. Após esta descrição ouça a leitura automática ou utilize as teclas seta para cima e para baixo para navegar pelas notificações.
+                    </p>
 
                     <button
                         type="button"
@@ -100,7 +92,12 @@ export default function NotificacaoModal({ aberto, onClose, notificacoes, atuali
                     
                     {notificacoes.length === 0 ? (
 
-                        <p>Nenhuma notificação pendente.</p>
+                        <p
+                            role="status"
+                            aria-live="polite"
+                        >
+                            Nenhuma notificação pendente.
+                        </p>
 
                     ) : (    
                         <div className="notificacoes-lista">
@@ -128,7 +125,7 @@ export default function NotificacaoModal({ aberto, onClose, notificacoes, atuali
 
                                     </small>
 
-                                    <button type="button" className="resolver-button" onClick={() => resolver(notificacao.id)}>
+                                    <button type="button" className="resolver-button" aria-label={`Marcar a notificação: ${notificacao.mensagem} como resolvida`} onClick={() => resolver(notificacao.id)}>
 
                                         Marcar como resolvida
 
