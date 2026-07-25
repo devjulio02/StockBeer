@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../styles/EditarBebidaModal.css";
+import useFocusTrap from "../hooks/useFocusTrap";
 
 export default function EditarBebidaModal({
     aberto,
@@ -17,6 +18,11 @@ export default function EditarBebidaModal({
         estoque_minimo: ""
     });
 
+    const modalRef = useFocusTrap(
+        aberto,
+        onClose
+    );
+
     useEffect(() => {
         if (bebida) {
             setForm({
@@ -29,30 +35,6 @@ export default function EditarBebidaModal({
             });
         }
     }, [bebida]);
-
-    useEffect(() => {
-
-        if (!aberto) return;
-
-        function handleEscape(event) {
-
-            if (event.key === "Escape") {
-
-                onClose();
-
-            }
-
-        }
-
-        window.addEventListener("keydown", handleEscape);
-
-        return () => {
-
-            window.removeEventListener("keydown", handleEscape);
-
-        };
-
-    }, [aberto, onClose]);
 
     function handleChange(e) {
         setForm({
@@ -78,17 +60,28 @@ export default function EditarBebidaModal({
         <div className="modal-overlay" onClick={onClose}>
 
             <div 
+                ref={modalRef}
                 className="editar-bebida-modal"
                 id="editar-bebida-modal"
                 role="dialog"
                 aria-modal="true"
-                aria-labelledby="editar-bebida-modal-title" 
+                aria-labelledby="editar-bebida-modal-title"
+                aria-describedby="editar-bebida-modal-description"
+                tabIndex={-1} 
                 onClick={(e) => e.stopPropagation()}
             >
 
                 <h2 id="editar-bebida-modal-title">
                     Editar Bebida
                 </h2>
+
+                <p
+                    id="editar-bebida-modal-description"
+                    className="sr-only"
+                >
+                    Formulário para edição dos dados da bebida selecionada.
+                    Ouça a descrição automática ou utilize a tecla Tab ou Shift+Tab para navegar entre os campos.
+                </p>
 
                 <form onSubmit={handleSubmit}>
 
@@ -135,7 +128,7 @@ export default function EditarBebidaModal({
                         onChange={handleChange}
                         required
                     >
-                        <option value="">Selecione</option>
+                        <option value="">Selecione uma categoria</option>
                         <option value="Cerveja">Cerveja</option>
                         <option value="Destilados">Destilados</option>
                         <option value="Energético">Energético</option>

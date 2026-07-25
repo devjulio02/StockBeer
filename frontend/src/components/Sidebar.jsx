@@ -96,15 +96,26 @@ export default function Sidebar() {
                 
                 <div className="admin-container">
 
-                    <div className="admin-box">
+                  <div
+                        className="admin-box"
+                        tabIndex={0}
+                        aria-label={
+                            `Perfil do usuário logado. ` +
+                            `Usuário logado: ${usuario?.nome || "Não identificado"}. ` +
+                            `E-mail do usuário logado: ${usuario?.email || "Não informado"}.`
+                        }
+                    >
 
                         <div className="avatar" aria-hidden="true">
                             {usuario?.nome?.charAt(0).toUpperCase() || "A"}
                         </div>
 
-                        <div className="admin-info" aria-label="Usuário autenticado">
+                        <div className="admin-info">
+
                             <strong>{usuario?.nome}</strong>
+
                             <p>{usuario?.email}</p>
+
                         </div>
 
                     </div>

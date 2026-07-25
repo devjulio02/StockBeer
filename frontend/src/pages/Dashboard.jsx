@@ -1,6 +1,6 @@
 import Sidebar from "../components/Sidebar";
 import "../styles/dashboard.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { buscarPainel } from "../services/painelService";
 import ResumoCard from "../components/ResumoCard";
 import AlertPanel from "../components/AlertPanel";
@@ -31,6 +31,14 @@ export default function Dashboard() {
     const dataFormatada =
         dataAtual.charAt(0).toUpperCase() +
         dataAtual.slice(1);
+
+    const tituloRef = useRef(null);
+
+    useEffect(() => {
+        if (!carregando) {
+            tituloRef.current?.focus();
+        }
+    }, [carregando]);
 
     async function carregarNotificacoes() {
 
@@ -98,7 +106,7 @@ export default function Dashboard() {
 
                     <div>
 
-                        <h1>Dashboard</h1>
+                        <h1 ref= {tituloRef} tabIndex={-1} aria-label="Tela Dashboard para visão geral do sistema" >Dashboard</h1>
 
                         <p>
 
