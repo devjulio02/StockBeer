@@ -34,13 +34,13 @@ O StockBeer busca automatizar esse processo, oferecendo mais controle e organiza
 
 ## 👥 Equipe
 
-| Integrante       | Função Atual       |
-| ---------------- | ------------------ |
-| Monique da Silva | Gerente de Projeto |
-| Júlio Soares     | Front-end          |
-| Pedro Gabriel    | Back-end           |
+| Integrante       |
+| ---------------- |
+| Monique da Silva |
+| Júlio Soares     |
+| Pedro Gabriel    |
 
-> Os papéis podem ser alternados entre os integrantes ao longo das sprints, conforme a metodologia adotada pela disciplina.
+> Os papéis(Gerente, Back-end e Front-end) podem ser alternados entre os integrantes ao longo das sprints, conforme a metodologia adotada pela disciplina.
 
 ---
 
@@ -65,7 +65,7 @@ O StockBeer busca automatizar esse processo, oferecendo mais controle e organiza
 
 * Dashboard;
 * Alertas de estoque baixo;
-* Relatórios básicos.
+* Entrada e saída de mercadorias
 
 ---
 
@@ -75,37 +75,14 @@ O projeto será desenvolvido utilizando Scrum.
 
 ### Sprints
 
-| Sprint   | Objetivo                   |
-| -------- | -------------------------- |
-| Sprint 1 | Levantamento de requisitos |
-| Sprint 2 | Protótipos e modelagem     |
-| Sprint 3 | Desenvolvimento Front-end  |
-| Sprint 4 | Desenvolvimento Back-end   |
-| Sprint 5 | Integração                 |
-| Sprint 6 | Testes e apresentação      |
-
----
-
-## 📂 Estrutura do Projeto
-
-```text
-stockbeer/
-│
-├── frontend/
-│   ├── screens/
-│   ├── components/
-│   └── assets/
-│
-├── backend/
-│   ├── routes/
-│   ├── controllers/
-│   ├── services/
-│   └── database/
-│
-├── docs/
-│
-└── README.md
-```
+| Sprint   | Objetivo                                                   |
+| -------- | ---------------------------------------------------------- |
+| Sprint 1 | Planejamento e estrutura do projeto                        |
+| Sprint 2 | Início do desenvolvimento                                  |
+| Sprint 3 | Desenvolvimento das funcionalidades de bebidas             |
+| Sprint 4 | Desenvolvimento e integração das funcionalidades           |
+| Sprint 5 | Funcionalidades complementares, acessibilidade e integração|
+| Sprint 6 | Testes finais e apresentação                               |
 
 ---
 
