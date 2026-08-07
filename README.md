@@ -104,3 +104,134 @@ As atividades são organizadas no Jira utilizando:
 * Concluído
 
 ---
+
+# Pré-requisitos
+
+Antes de executar o projeto, certifique-se de possuir instalado:
+
+* Git
+* Docker
+* Docker Compose
+* Python 3.12 ou superior
+* Node.js 18 ou superior
+* npm
+
+---
+
+# Clonando o projeto
+
+```bash
+git clone https://github.com/devjulio02/StockBeer/tree/develop
+cd StockBeer
+```
+
+---
+
+# Executando o banco de dados
+
+Na raiz do projeto execute:
+
+```bash
+docker compose up -d
+```
+
+Verifique se o container foi iniciado:
+
+```bash
+docker ps
+```
+
+O container deverá aparecer como:
+
+```
+stockbeer-db
+```
+
+---
+
+# Configurando o Backend
+
+Entre na pasta do backend:
+
+```bash
+cd backend
+```
+
+Crie um ambiente virtual:
+
+```bash
+python3 -m venv venv
+```
+
+Ative o ambiente virtual.
+
+### Linux/macOS
+
+```bash
+source venv/bin/activate
+```
+
+### Windows
+
+```powershell
+venv\Scripts\activate
+```
+
+Instale as dependências:
+
+```bash
+pip install -r requirements.txt
+```
+
+Execute a aplicação:
+
+```bash
+python3 app.py
+```
+
+O backend ficará disponível em:
+
+```
+http://localhost:5000
+```
+
+---
+
+# Configurando o Frontend
+
+Abra outro terminal.
+
+Entre na pasta:
+
+```bash
+cd frontend
+```
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+Execute o projeto:
+
+```bash
+npm run dev
+```
+
+O frontend ficará disponível em:
+
+```
+http://localhost:5173
+```
+
+# Encerrando
+
+Após executar todos os passos:
+
+* Banco: **PostgreSQL** em execução via Docker;
+* Backend: disponível em `http://localhost:5000`;
+* Frontend: disponível em `http://localhost:5173`.
+
+O sistema estará pronto para uso.
+
